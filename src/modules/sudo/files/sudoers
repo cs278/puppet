@@ -1,0 +1,70 @@
+###
+### Do not edit; managed by Puppet.
+###
+
+# Check syntax with /usr/sbin/visudo -cf sudoers
+
+Defaults	env_keep=SSH_AUTH_SOCK
+Defaults	env_reset
+Defaults	insults
+
+# Users
+User_Alias	OPS			= root, %admin, %adm
+User_Alias	BACKUPS		= backup
+User_Alias	CHRIS		= chris
+
+# Runas
+Runas_Alias	ROOT		= root
+
+# Hosts
+Host_Alias	DESKTOPS		= kinslayer
+Host_Alias	LAPTOPS			= warrior
+Host_Alias	WORKSTATIONS	= DESKTOPS, LAPTOPS
+
+# Commands
+Cmnd_Alias	REBOOT		= /sbin/reboot
+Cmnd_Alias	SHUTDOWN	= /sbin/poweroff, REBOOT
+Cmnd_Alias	LAMP		= APACHE, MYSQL
+
+Cmnd_Alias	SERVICE		= /etc/init.d/*, SERVICE_START, SERVICE_STOP, SERVICE_RESTART, SERVICE_STATUS, SERVICE_RELOAD
+Cmnd_Alias	SERVICE_START	= /etc/init.d/* start, /sbin/start, /usr/sbin/service * start
+Cmnd_Alias	SERVICE_STOP	= /etc/init.d/* stop, /sbin/stop, /usr/sbin/service * stop
+Cmnd_Alias	SERVICE_RESTART	= /etc/init.d/* restart, /sbin/restart, /usr/sbin/service * restart
+Cmnd_Alias	SERVICE_STATUS	= /etc/init.d/* status, /sbin/status, /usr/sbin/service * status
+Cmnd_Alias	SERVICE_RELOAD	= /etc/init.d/* reload, /sbin/reload, /usr/sbin/service * reload
+
+Cmnd_Alias	TAIL_LOG	= /usr/bin/tail -f /var/log/*, /usr/bin/tail /var/log/*, /bin/tailf /var/log/*
+
+Cmnd_Alias	BACKUP		= /usr/local/sbin/backup
+
+Cmnd_Alias	APT_UPDATE	= /usr/bin/aptitude update, /usr/bin/apt-get update
+Cmnd_Alias	APT_UPGRADE	= /usr/bin/aptitude safe-upgrade, /usr/bin/apt-get safe-upgrade
+
+Cmnd_Alias	LVM_STAT	= /sbin/lvs, /sbin/vgs, /sbin/pvs, /sbin/pvdisplay, /sbin/lvdisplay, /sbin/vgdisplay
+
+Cmnd_Alias	APACHE		= /usr/sbin/service apache2 *
+Cmnd_Alias	MYSQL		= /usr/sbin/service mysql *
+
+# Users			Hosts			As				Options		Commands
+
+# Workstations
+CHRIS			WORKSTATIONS	= (ROOT)					ALL
+CHRIS			WORKSTATIONS	= (ROOT)					LAMP, REBOOT
+CHRIS			WORKSTATIONS	= (ALL)	NOEXEC: NOPASSWD:	LVM_STAT
+CHRIS			WORKSTATIONS	= (ROOT)		NOPASSWD:	BACKUP
+CHRIS			WORKSTATIONS	= (ROOT)		NOPASSWD:	APT_UPDATE, APT_UPGRADE
+CHRIS			WORKSTATIONS	= (ALL)	NOEXEC: NOPASSWD:	TAIL_LOG
+CHRIS			WORKSTATIONS	= (ROOT)		NOPASSWD:	SERVICE_STATUS, SERVICE_RELOAD
+CHRIS			WORKSTATIONS	= (ROOT)		NOPASSWD:	SERVICE_START, SERVICE_RESTART
+
+# Network wide rules
+OPS				ALL				= (ALL)						ALL
+OPS				ALL				= (ALL)	NOEXEC: NOPASSWD:	LVM_STAT
+OPS				ALL				= (ROOT)		NOPASSWD:	BACKUP
+OPS				ALL				= (ALL)			NOPASSWD:	APT_UPDATE, APT_UPGRADE
+OPS				ALL				= (ALL)	NOEXEC: NOPASSWD:	TAIL_LOG
+OPS				ALL				= (ROOT)		NOPASSWD:	SERVICE_STATUS, SERVICE_RELOAD
+OPS				ALL				= (ROOT)		NOPASSWD:	SERVICE_START, SERVICE_RESTART
+BACKUPS			ALL				= (ROOT)		NOPASSWD:	/usr/bin/rdiff-backup --server --restrict-read-only /
+
+#includedir /etc/sudoers.site.d
