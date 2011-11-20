@@ -1,0 +1,6 @@
+[submodule "vendor/common"]
+	path = vendor/common
+	url = git://github.com/camptocamp/puppet-common.git
+[submodule "vendor/apt"]
+	path = vendor/apt
+	url = git://github.com/camptocamp/puppet-apt.git
