@@ -1,0 +1,132 @@
+multi_instance_name = postfix-gateway
+multi_instance_group = gateway
+multi_instance_enable = yes
+data_directory = /var/lib/$multi_instance_name
+queue_directory = /var/spool/$multi_instance_name
+
+# No local delivery on border gateway
+#
+mydestination =
+alias_maps =
+alias_database =
+local_recipient_maps =
+local_transport = error:5.1.1 Mailbox unavailable
+authorized_submit_users =
+
+# Don't rewrite remote headers
+#
+local_header_rewrite_clients =
+
+# All recipients of not yet filtered email go to the same filter together.
+#
+# With multiple instances, the content-filter is specified
+# via transport settings not the "content_filter" transport
+# switch override! Here the filter listens on local port 10025.
+#
+# If you need to route some users or recipient domains directly to the
+# output instance bypassing the filter, just define a transport table
+# with suitable entries.
+#
+default_transport = smtp:[127.0.0.1]:10025
+relay_transport = $default_transport
+virtual_transport = $default_transport
+transport_maps =
+
+# Pass original client log information through the filter.
+#
+smtp_send_xforward_command = yes
+
+# Avoid splitting the envelope and scanning messages multiple times.
+# Match the re-injection server's recipient limit.
+#
+smtp_destination_recipient_limit = 1000
+
+# Tolerate occasional high latency in the content filter.
+#
+smtp_data_done_timeout = 1200s
+
+# With xforward, match the output instance setting, if you
+# want "yes", set both to "yes".
+#
+smtpd_client_port_logging = no
+
+myhostname = mx<%= index %>.$mydomain
+mynetworks =
+
+# Public SMTP server options
+smtpd_banner = $myhostname NO UCE ESMTP $mail_name (<%= lsbdistid %>) <postmaster@cs278.org>
+smtpd_helo_required = yes
+smtpd_soft_error_limit = 5
+smtpd_hard_error_limit = 10
+smtpd_tls_security_level = may
+smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+smtpd_tls_cert_file=/etc/ssl/certs/*.cs278.org.pem
+smtpd_tls_key_file=/etc/ssl/private/*.cs278.org.pem
+smtpd_tls_received_header = yes
+smtpd_tls_ask_ccert = yes
+smtpd_tls_loglevel = 1
+
+# Inbound settings
+biff = no
+parent_domain_matches_subdomains =
+strict_rfc821_envelopes = yes
+disable_vrfy_command = yes
+milter_default_action = accept
+append_dot_mydomain = no
+recipient_delimiter = +
+relay_domains = cdb:${config_directory}/maps/domains
+relay_recipient_maps = cdb:${config_directory}/maps/recipients
+relay_transport = smtp:[delivery.mail.cs278.org]
+
+smtpd_client_restrictions = 
+#	check_client_access cdb:${config_directory}/access/client,
+#	check_client_access cdb:${config_directory}/access/blacklist,
+#	check_client_access cdb:${config_directory}/access/client-traplist,
+	permit
+
+smtpd_helo_restrictions = 
+#	check_helo_access cdb:${config_directory}/access/helo,
+	reject_invalid_helo_hostname,
+	reject_non_fqdn_helo_hostname,
+	warn_if_reject,
+	reject_unknown_helo_hostname,
+	permit
+
+smtpd_sender_restrictions =
+	reject_non_fqdn_sender,
+	check_sender_access cdb:${config_directory}/access/sender,
+	reject_unknown_sender_domain,
+	permit
+
+smtpd_recipient_restrictions =
+	reject_non_fqdn_recipient,
+	reject_unknown_recipient_domain,
+
+	# Reject RCPT TO addresses we don't know, earlier rather than later
+	reject_unlisted_recipient,
+	reject_unauth_destination,
+
+#	check_recipient_access cdb:${config_directory}/access/traps,
+#	check_recipient_access cdb:${config_directory}/access/recipient,
+
+#	check_client_access cdb:${config_directory}/access/whitelist-client,
+
+	reject_rbl_client zen.spamhaus.org,
+	reject_rbl_client safe.dnsbl.sorbs.net,
+	reject_rbl_client bl.spamcop.net,
+	reject_rbl_client psbl.surriel.com,
+
+	reject_rhsbl_client rhsbl.sorbs.net,
+	reject_rhsbl_sender rhsbl.sorbs.net,
+
+	check_helo_access cdb:${config_directory}/access/whitelist-helo,
+	check_recipient_access cdb:${config_directory}/access/whitelist-recipient,
+	check_sender_access cdb:${config_directory}/access/whitelist-sender,
+
+	check_policy_service unix:private/spf,
+
+	permit
+
+smtpd_data_restrictions =
+	reject_unauth_pipelining,
+	permit

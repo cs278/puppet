@@ -1,0 +1,3 @@
+class mail::gateway::setup {
+
+}

@@ -1,0 +1,46 @@
+# We are mta1.example.com
+#
+myhostname = <%= myhostname %>
+mydomain = <%= mydomain %>
+
+# Flat user-account namespace in example.com:
+#
+#   user@example.com not user@host.example.com
+#
+myorigin = $mydomain
+
+# Postfix 2.6+, disable inet services, specifically disable smtpd(8)
+#
+master_service_disable = inet
+
+# No local delivery:
+#
+mydestination =
+local_transport = error:5.1.1 Mailbox unavailable
+alias_database =
+alias_maps =
+local_recipient_maps =
+
+# Send everything to the internal mailhub
+#
+relayhost = [<%= hub %>]
+
+# Indexed table macro:
+# (use "hash", ... when cdb is not available)
+#
+default_database_type = cdb
+indexed = ${default_database_type}:${config_directory}/
+
+# Expose origin host of mail from "root", ...
+#
+smtp_generic_maps = ${indexed}generic
+
+# Send messages addressed to "root", ... to the MTA support team
+#
+virtual_alias_maps = ${indexed}virtual
+
+# Multi instance support
+# Simulates postmulti -e init
+multi_instance_wrapper = ${command_directory}/postmulti -p --
+multi_instance_enable = yes
+multi_instance_directories = <% instances.each do |instance| %>/etc/postfix-<%= instance.name.gsub('Class/', '').split('::')[1].downcase %> <% end %>
