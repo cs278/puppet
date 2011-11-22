@@ -5,8 +5,6 @@ class mail::main($instances = []) {
 	$mydomain = "cs278.org"
 	$hub = "hub.mail.cs278.org"
 
-	Mail::Instance <| |>
-
 	file {
 		"/etc/postfix/main.cf":
 			ensure  => present,

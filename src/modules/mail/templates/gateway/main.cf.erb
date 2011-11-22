@@ -50,6 +50,7 @@ smtp_data_done_timeout = 1200s
 #
 smtpd_client_port_logging = no
 
+mydomain = cs278.org
 myhostname = mx<%= index %>.$mydomain
 mynetworks =
 
@@ -94,7 +95,7 @@ smtpd_helo_restrictions =
 
 smtpd_sender_restrictions =
 	reject_non_fqdn_sender,
-	check_sender_access cdb:${config_directory}/access/sender,
+#	check_sender_access cdb:${config_directory}/access/sender,
 	reject_unknown_sender_domain,
 	permit
 
@@ -119,11 +120,11 @@ smtpd_recipient_restrictions =
 	reject_rhsbl_client rhsbl.sorbs.net,
 	reject_rhsbl_sender rhsbl.sorbs.net,
 
-	check_helo_access cdb:${config_directory}/access/whitelist-helo,
-	check_recipient_access cdb:${config_directory}/access/whitelist-recipient,
-	check_sender_access cdb:${config_directory}/access/whitelist-sender,
+#	check_helo_access cdb:${config_directory}/access/whitelist-helo,
+#	check_recipient_access cdb:${config_directory}/access/whitelist-recipient,
+#	check_sender_access cdb:${config_directory}/access/whitelist-sender,
 
-	check_policy_service unix:private/spf,
+#	check_policy_service unix:private/spf,
 
 	permit
 
