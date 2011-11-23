@@ -1,5 +1,6 @@
 class mail::main($instances = []) {
 	include mail::package
+	include mail::service
 
 	$myhostname = $::fqdn
 	$mydomain = "cs278.org"
@@ -13,6 +14,7 @@ class mail::main($instances = []) {
 			group   => root,
 			content => template("mail/main/main.cf.erb"),
 			require => [$instances, Class["mail::package"]],
+			notify  => Class["mail::service"],
 		;
 		"/etc/postfix/generic":
 			ensure  => present,
