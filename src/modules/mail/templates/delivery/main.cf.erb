@@ -1,0 +1,58 @@
+# No local delivery on MDA
+#
+mydestination =
+alias_maps =
+alias_database =
+local_recipient_maps =
+local_transport = error:5.1.1 Mailbox unavailable
+authorized_submit_users =
+
+# Don't rewrite remote headers
+#
+local_header_rewrite_clients =
+
+myhostname = delivery.mail.$mydomain
+mynetworks =
+
+# Public SMTP server options
+smtpd_tls_security_level = may
+smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+smtpd_tls_cert_file=/etc/ssl/certs/*.cs278.org.pem
+smtpd_tls_key_file=/etc/ssl/private/*.cs278.org.pem
+smtpd_tls_received_header = yes
+smtpd_tls_ask_ccert = yes
+smtpd_tls_loglevel = 1
+
+# Inbound settings
+biff = no
+parent_domain_matches_subdomains =
+strict_rfc821_envelopes = yes
+disable_vrfy_command = yes
+milter_default_action = accept
+append_dot_mydomain = no
+recipient_delimiter = +
+
+# Size limits
+message_size_limit = 52428800
+mailbox_size_limit = 0
+
+transport_maps = mysql:$config_directory/mysql/transport.cf
+virtual_transport = dovecot
+dovecot_destination_recipient_limit = 1
+virtual_alias_maps = mysql:$config_directory/mysql/aliases.cf
+virtual_mailbox_domains = mysql:$config_directory/mysql/domains.cf
+virtual_mailbox_base = <%= vmail_store %>
+virtual_mailbox_maps = mysql:$config_directory/mysql/mailboxes.cf
+virtual_minimum_uid = 1
+virtual_uid_maps = static:<%= vmail_uid %>
+virtual_gid_maps = static:<%= vmail_gid %>
+
+smtpd_client_restrictions =
+	permit
+
+smtpd_recipient_restrictions =
+	reject_non_fqdn_recipient,
+	reject_unknown_recipient_domain,
+	reject_unlisted_recipient,
+	reject_unauth_destination,
+	permit

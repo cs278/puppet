@@ -1,0 +1,24 @@
+hosts    = <%= db_hosts %>
+user     = <%= db_username %>
+password = <%= db_password %>
+dbname   = <%= db_database %>
+query    = \
+	SELECT IFNULL( \
+		( \
+			SELECT GROUP_CONCAT(a.destination SEPARATOR ', ') AS destination \
+				FROM aliases AS a \
+				LEFT JOIN domains AS d \
+					ON (a.domain_id = d.id) \
+				WHERE a.source = '%u' \
+					AND d.domain = '%d' \
+				GROUP BY a.source \
+		), ( \
+			SELECT GROUP_CONCAT(a.destination SEPARATOR ', ') AS destination \
+				FROM aliases AS a \
+				LEFT JOIN domains AS d \
+					ON (a.domain_id = d.id) \
+				WHERE a.source = '' \
+					AND d.domain = '%d' \
+				GROUP BY a.source \
+		) \
+	)
