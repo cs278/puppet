@@ -1,9 +1,3 @@
-multi_instance_name = postfix-gateway
-multi_instance_group = gateway
-multi_instance_enable = yes
-data_directory = /var/lib/$multi_instance_name
-queue_directory = /var/spool/$multi_instance_name
-
 # No local delivery on border gateway
 #
 mydestination =
@@ -50,15 +44,10 @@ smtp_data_done_timeout = 1200s
 #
 smtpd_client_port_logging = no
 
-mydomain = cs278.org
 myhostname = mx<%= index %>.$mydomain
 mynetworks =
 
 # Public SMTP server options
-smtpd_banner = $myhostname NO UCE ESMTP $mail_name (<%= lsbdistid %>) <postmaster@cs278.org>
-smtpd_helo_required = yes
-smtpd_soft_error_limit = 5
-smtpd_hard_error_limit = 10
 smtpd_tls_security_level = may
 smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
 smtpd_tls_cert_file=/etc/ssl/certs/*.cs278.org.pem
