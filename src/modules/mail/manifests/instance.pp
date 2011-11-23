@@ -1,28 +1,37 @@
 define mail::instance($master, $main, $require = undef) {
 
+	if ($group == "") {
+		$group = $name
+	}
+	$ident = "postfix-$name"
+	$config = "/etc/${ident}"
+	$queue = "/var/spool/${ident}"
+	$data = "/var/lib/${ident}"
+	$domain = "cs278.org"
+
 	file {
-		"/etc/postfix-$name":
+		"${config}":
 			ensure  => directory,
 			owner   => root,
 			group   => root,
 			mode    => 0555,
 			require => $require,
 		;
-		"/var/spool/postfix-$name":
+		"${queue}":
 			ensure  => directory,
 			owner   => root,
 			group   => root,
 			mode    => 0755,
 			require => $require,
 		;
-		"/var/lib/postfix-$name":
+		"${data}":
 			ensure  => directory,
 			owner   => postfix,
 			group   => postfix,
 			mode    => 0755,
 			require => $require,
 		;
-		"/etc/postfix-${name}/dynamicmaps.cf":
+		"${config}/dynamicmaps.cf":
 			ensure  => file,
 			owner   => root,
 			group   => root,
@@ -30,7 +39,7 @@ define mail::instance($master, $main, $require = undef) {
 			content => file("/etc/postfix/dynamicmaps.cf"),
 			require => File["/etc/postfix-${name}"],
 		;
-		"/etc/postfix-${name}/master.cf":
+		"${config}/master.cf":
 			ensure  => file,
 			owner   => root,
 			group   => root,
@@ -38,12 +47,12 @@ define mail::instance($master, $main, $require = undef) {
 			content => $master,
 			require => File["/etc/postfix-${name}"],
 		;
-		"/etc/postfix-${name}/main.cf":
+		"${config}/main.cf":
 			ensure  => file,
 			owner   => root,
 			group   => root,
 			mode    => 0444,
-			content => $main,
+			content => template("mail/main.instance.cf.erb"),
 			require => File["/etc/postfix-${name}"],
 		;
 	}

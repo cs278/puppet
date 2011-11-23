@@ -1,0 +1,16 @@
+# Managed by Puppet; do not edit!
+
+multi_instance_name = <%= ident %>
+multi_instance_group = <%= group %>
+multi_instance_enable = yes
+data_directory = <%= data %>
+queue_directory = <%= queue %>
+
+mydomain = <%= domain %>
+
+<%= main %>
+
+smtpd_banner = $myhostname ($multi_instance_group) NO UCE ESMTP $mail_name (<%= lsbdistid %>/<%= lsbdistrelease %>) <postmaster@<%= domain %>>
+smtpd_helo_required = yes
+smtpd_soft_error_limit = 5
+smtpd_hard_error_limit = 10
