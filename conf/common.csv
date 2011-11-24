@@ -1,0 +1,8 @@
+mail::domain,cs278.org
+mail::postmaster,postmaster@cs278.org
+mail::delivery::uid,8
+mail::delivery::gid,8
+mail::delivery::store,/var/spool/mail
+mail::delivery::hosts,127.0.0.1
+mail::delivery::username,system-email
+mail::delivery::database,system_email
