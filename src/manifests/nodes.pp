@@ -3,7 +3,7 @@ include apt
 include base
 
 # extlookup() configuration
-$extlookup_datadir = "/home/chris/projects/puppet/conf"
+$extlookup_datadir = "conf"
 $extlookup_precedence = ["private/${::fqdn}", "private/common", "${::fqdn}", "common"]
 
 Exec {
