@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Run this script on the machine you wish to configure for Puppet
+
+if [ $(id -u) -u -gt 0 ];
+then
+	echo "You must be root to run this script." >&2
+	exit 1
+fi
+
+conf=/etc/puppet
+repo=`dirname $0`
+repo=`cd $repo/..; pwd`
+
+aptitude -yq=5 install puppet git &&
+rm -rf "$conf" &&
+git init -q "$conf" &&
+cd "$conf" &&
+git pull file://"$repo" &&
+git submodule update --init --recursive &&
+$conf/bin/apply
