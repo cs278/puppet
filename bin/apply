@@ -1,6 +1,25 @@
 #!/bin/sh
 
+lockfile=/var/run/puppet-apply.lock
 path=`dirname $0`
 path=`cd $path/..; pwd`
 
-sudo puppet apply --modulepath=$path/vendor:$path/src/modules $path/src/manifests/nodes.pp "$@"
+if [ $(id -u) -gt 0 ];
+then
+	echo "You must be root to run this script." >&2
+	exit 2
+fi
+
+if (set -o noclobber; echo "$$" > "$lockfile") 2> /dev/null;
+then
+    trap 'rm -f "$lockfile"; exit $?' INT TERM EXIT
+
+	puppet apply --modulepath=$path/vendor:$path/src/modules $path/src/manifests/nodes.pp "$@"
+
+    rm -f "$lockfile"
+    trap - INT TERM EXIT
+else
+    echo "Failed to acquire lockfile: $lockfile." >&2
+    echo "Held by $(cat $lockfile 2>/dev/null)" >&2
+    exit 1
+fi
