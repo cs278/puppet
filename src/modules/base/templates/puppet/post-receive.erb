@@ -4,6 +4,12 @@
 ## This file is managed by Puppet; do not edit!
 ##
 
+conf="<%= conf %>"
+
+repo=$GIT_DIR
+
+unset GIT_DIR
+
 while read line;
 do
 	old=$(echo "$line" | awk '{ print $1 }')
@@ -12,8 +18,9 @@ do
 
 	case "$ref" in
 		*)
-			echo "Unrecognised ref '$ref'." >&2
-			exit 1
+			cd "$conf" &&
+			git fetch file:///$repo &&
+			git checkout --force $new
 		;;	
 	esac
 done

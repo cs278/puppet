@@ -1,0 +1,38 @@
+#!/bin/dash
+
+old=$1
+new=$2
+branch=$3
+
+if [ $branch -eq 0 ];
+then
+	# File checkout; ignore
+	exit 0
+fi
+
+merge_dir="$GIT_DIR"/rebase-merge
+apply_dir="$GIT_DIR"/rebase-apply
+
+if [ -d "$merge_dir" -o -d "$apply_dir" ];
+then
+	# Rebase in progress; ignore
+	exit 0
+fi
+
+if [ -x bin/apply ];
+then
+	sudo bin/apply
+
+	result=$?
+
+	if [ $result -eq 0 ];
+	then
+		git tag --force <%= fqdn %> $new
+	else
+		git checkout $old
+	fi
+else
+	# Apply script is missing, bomb out
+	echo "apply script cannot be found or executed." >&2
+	exit 1
+fi

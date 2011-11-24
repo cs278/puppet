@@ -12,6 +12,7 @@ Defaults	insults
 User_Alias	OPS			= root, %admin, %adm
 User_Alias	BACKUPS		= backup
 User_Alias	CHRIS		= chris
+User_Alias	PUPPET		= puppet
 
 # Runas
 Runas_Alias	ROOT		= root
@@ -45,6 +46,8 @@ Cmnd_Alias	LVM_STAT	= /sbin/lvs, /sbin/vgs, /sbin/pvs, /sbin/pvdisplay, /sbin/lv
 Cmnd_Alias	APACHE		= /usr/sbin/service apache2 *
 Cmnd_Alias	MYSQL		= /usr/sbin/service mysql *
 
+Cmnd_Alias	PUPPET		= /etc/puppet/bin/apply
+
 # Users			Hosts			As				Options		Commands
 
 # Workstations
@@ -66,5 +69,6 @@ OPS				ALL				= (ALL)	NOEXEC: NOPASSWD:	TAIL_LOG
 OPS				ALL				= (ROOT)		NOPASSWD:	SERVICE_STATUS, SERVICE_RELOAD
 OPS				ALL				= (ROOT)		NOPASSWD:	SERVICE_START, SERVICE_RESTART
 BACKUPS			ALL				= (ROOT)		NOPASSWD:	/usr/bin/rdiff-backup --server --restrict-read-only /
+PUPPET			ALL				= (ROOT)		NOPASSWD:	PUPPET
 
 #includedir /etc/sudoers.site.d
