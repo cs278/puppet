@@ -4,6 +4,8 @@ class base::puppet {
 
 	# Inspiration for this comes from:
 	# * http://current.workingdirectory.net/posts/2011/puppet-without-masters/
+	# * http://bitfieldconsulting.com/scaling-puppet-with-distributed-version-control
+	# * https://git.mayfirst.org/?p=mfpl/puppet.git;a=summary
 
 	$repo = "/srv/puppet.git"
 
