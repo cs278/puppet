@@ -13,12 +13,20 @@ class base::puppet {
 	exec {
 		"${repo}":
 			command => "git init --bare ${repo}",
-			creates => $repo,
-			require => Class["git"],
+			creates => "${repo}/HEAD",
+			user    => puppet,
+			group   => puppet,
+			require => [Class["git"], File[$repo]],
 		;
 	}
 
 	file {
+		"${repo}":
+			ensure  => directory,
+			mode    => 0755,
+			owner   => puppet,
+			group   => puppet,
+		;
 		"${conf}":
 			ensure  => directory,
 			mode    => 0755,
