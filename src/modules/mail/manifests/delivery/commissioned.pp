@@ -1,14 +1,14 @@
 class mail::delivery::commissioned {
 	include mail::delivery::package
 
-	$vmail_store = "/var/spool/mail"
-	$vmail_uid = 8
-	$vmail_gid = 8
+	$vmail_store = extlookup("mail::delivery::store")
+	$vmail_uid = extlookup("mail::delivery::uid")
+	$vmail_gid = extlookup("mail::delivery::gid")
 
-	$db_hosts = "127.0.0.1"
-	$db_username = "postfix"
-	$db_password = "wibbleSpoonz"
-	$db_database = "system_email"
+	$db_hosts = extlookup("mail::delivery::hosts")
+	$db_username = extlookup("mail::delivery::username")
+	$db_password = extlookup("mail::delivery::password")
+	$db_database = extlookup("mail::delivery::database")
 
 	user {
 		"mail":

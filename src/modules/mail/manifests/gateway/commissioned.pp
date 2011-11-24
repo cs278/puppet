@@ -1,7 +1,7 @@
 class mail::gateway::commissioned {
 	include mail::gateway::package
 
-	$index = 0
+	$index = extlookup("mail::gateway::index")
 
 	mail::instance {
 		"gateway":
