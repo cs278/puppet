@@ -12,7 +12,9 @@ conf=/etc/puppet
 repo=`dirname $0`
 repo=`cd $repo/..; pwd`
 
-aptitude -yq=5 install puppet git &&
+which git &>/dev/null || aptitude -yq install git
+which puppet &>/dev/null || aptitude -yq install puppet
+
 rm -rf "$conf" &&
 git init -q "$conf" &&
 cd "$conf" &&
