@@ -21,6 +21,15 @@ class base::puppet {
 		;
 	}
 
+	user {
+		"puppet":
+			ensure  => present,
+			gid     => "puppet",
+			home	=> "/var/lib/puppet",
+			shell	=> "/usr/bin/git-shell",
+		;
+	}
+
 	file {
 		"${repo}":
 			ensure  => directory,
