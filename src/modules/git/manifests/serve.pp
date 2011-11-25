@@ -1,4 +1,4 @@
-class git::serve inherit git {
+class git::serve inherits git {
 	file {
 		"/usr/local/bin/git-serve":
 			ensure  => file,
