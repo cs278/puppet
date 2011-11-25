@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $SSH_ORIGINAL_COMMAND in
+	"git-receive-pack"*|"git-upload-pack"*|"git-upload-archive"*)
+		exec $SSH_ORIGINAL_COMMAND
+	;;
+
+	*)
+		echo "You are not permitted to execute:"
+		echo "$SSH_ORIGINAL_COMMAND" >&2
+		exit 1
+	;;
+esac
