@@ -26,7 +26,7 @@ class base::puppet {
 			ensure  => present,
 			gid     => "puppet",
 			home	=> "/var/lib/puppet",
-			shell	=> "/usr/bin/git-shell",
+			shell	=> "/bin/sh",
 		;
 	}
 
