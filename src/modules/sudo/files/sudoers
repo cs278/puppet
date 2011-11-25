@@ -70,5 +70,6 @@ OPS				ALL				= (ROOT)		NOPASSWD:	SERVICE_STATUS, SERVICE_RELOAD
 OPS				ALL				= (ROOT)		NOPASSWD:	SERVICE_START, SERVICE_RESTART
 BACKUPS			ALL				= (ROOT)		NOPASSWD:	/usr/bin/rdiff-backup --server --restrict-read-only /
 PUPPET			ALL				= (ROOT)		NOPASSWD:	PUPPET
+PUPPET			ALL				= (ROOT)		NOPASSWD:	/bin/sh hooks/post-receive
 
 #includedir /etc/sudoers.site.d
