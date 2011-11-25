@@ -63,5 +63,19 @@ class base::puppet {
 			content => template("base/puppet/post-receive.erb"),
 			require => Exec[$repo],
 		;
+		"/var/lib/puppet/.ssh":
+			ensure  => directory,
+			mode    => 0700,
+			owner   => puppet,
+			group   => puppet,
+		;
+		"/var/lib/puppet/.ssh/authorized_keys":
+			ensure  => file,
+			mode    => 0400,
+			owner   => puppet,
+			group   => puppet,
+			source  => "puppet:///modules/base/puppet/authorized_keys",
+			require => [File["/var/lib/puppet/.ssh"], Class["git::serve"]],
+		;
 	}
 }
