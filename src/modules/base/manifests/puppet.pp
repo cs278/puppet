@@ -1,6 +1,7 @@
 class base::puppet {
 	include puppet
 	include git
+	include git::serve
 
 	# Inspiration for this comes from:
 	# * http://current.workingdirectory.net/posts/2011/puppet-without-masters/
