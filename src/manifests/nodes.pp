@@ -5,6 +5,7 @@ $extlookup_precedence = ["private/${::fqdn}", "private/common", "${::fqdn}", "co
 include common
 include apt
 include base
+include timezone
 
 Exec {
 	path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
