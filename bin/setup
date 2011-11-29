@@ -12,6 +12,8 @@ conf=/etc/puppet
 repo=`dirname $0`
 repo=`cd $repo/..; pwd`
 
+aptitude -yq update
+
 which git >/dev/null || aptitude -yq install git
 
 if [ $? -gt 0 ];
