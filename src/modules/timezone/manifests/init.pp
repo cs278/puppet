@@ -5,6 +5,8 @@ class timezone {
 	$timezone = extlookup("timezone", "Etc/UTC")
 
 	timezone::set {
-		"${timezone}":;
+		"${timezone}":
+			require => Class["timezone::package"],
+		;
 	}
 }
