@@ -13,7 +13,18 @@ repo=`dirname $0`
 repo=`cd $repo/..; pwd`
 
 which git >/dev/null || aptitude -yq install git
+
+if [ $? -gt 0 ];
+then
+	echo "Failed to install git." >&2
+fi
+
 which puppet >/dev/null || aptitude -yq install puppet
+
+if [ $? -gt 0 ];
+then
+	echo "Failed to install puppet." >&2
+fi
 
 rm -rf "$conf" &&
 git init -q "$conf" &&
