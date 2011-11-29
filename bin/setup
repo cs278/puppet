@@ -2,7 +2,7 @@
 
 # Run this script on the machine you wish to configure for Puppet
 
-if [ $(id -u) -u -gt 0 ];
+if [ $(id -u) -gt 0 ];
 then
 	echo "You must be root to run this script." >&2
 	exit 1
