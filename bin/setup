@@ -12,6 +12,8 @@ conf=/etc/puppet
 repo=`dirname $0`
 repo=`cd $repo/..; pwd`
 
+rm -rf "$conf"
+
 aptitude -yq update
 
 which git >/dev/null || aptitude -yq install git
@@ -28,7 +30,6 @@ then
 	echo "Failed to install puppet." >&2
 fi
 
-rm -rf "$conf" &&
 git init -q "$conf" &&
 cd "$conf" &&
 git pull file://"$repo" &&
