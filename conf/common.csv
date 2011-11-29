@@ -1,3 +1,4 @@
+timezone,Europe/London
 mail::domain,cs278.org
 mail::postmaster,postmaster@cs278.org
 mail::delivery::uid,8
