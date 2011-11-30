@@ -1,5 +1,4 @@
 timezone,Europe/London
-roles::mail::gateway,1
 mail::domain,cs278.org
 mail::postmaster,postmaster@cs278.org
 mail::delivery::uid,8
