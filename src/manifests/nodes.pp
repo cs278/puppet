@@ -14,4 +14,5 @@ Exec {
 node default {
 	include sudo
 	include git
+	include roles
 }
