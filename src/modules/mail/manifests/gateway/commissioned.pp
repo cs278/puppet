@@ -7,7 +7,7 @@ class mail::gateway::commissioned {
 		"gateway":
 			master  => template("mail/gateway/master.cf.erb"),
 			main    => template("mail/gateway/main.cf.erb"),
-			require => Class["Mail::Gateway::Package"],
+			require => Class["mail::gateway::package"],
 		;
 	}
 
