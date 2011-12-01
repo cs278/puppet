@@ -37,7 +37,7 @@ define mail::instance($master, $main, $require = undef) {
 			group   => root,
 			mode    => 0444,
 			content => file("/etc/postfix/dynamicmaps.cf"),
-			require => File["/etc/postfix-${name}"],
+			require => [Class["mail::package"], File["/etc/postfix-${name}"]],
 		;
 		"${config}/master.cf":
 			ensure  => file,
