@@ -1,4 +1,4 @@
-define mail::instance($master, $main, $require = undef) {
+define mail::instance($master, $main) {
 
 	if ($group == "") {
 		$group = $name
@@ -15,14 +15,12 @@ define mail::instance($master, $main, $require = undef) {
 			owner   => root,
 			group   => root,
 			mode    => 0555,
-			require => $require,
 		;
 		"${queue}":
 			ensure  => directory,
 			owner   => root,
 			group   => root,
 			mode    => 0755,
-			require => $require,
 		;
 		"${data}":
 			ensure  => directory,
