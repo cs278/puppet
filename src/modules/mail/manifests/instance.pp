@@ -30,11 +30,10 @@ define mail::instance($master, $main) {
 			require => $require,
 		;
 		"${config}/dynamicmaps.cf":
-			ensure  => file,
+			ensure  => link,
 			owner   => root,
 			group   => root,
-			mode    => 0444,
-			content => file("/etc/postfix/dynamicmaps.cf"),
+			target  => "/etc/postfix/dynamicmaps.cf",
 			require => [Class["mail::package"], File["/etc/postfix-${name}"]],
 		;
 		"${config}/master.cf":
