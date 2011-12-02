@@ -9,7 +9,7 @@ class mail::gateway::commissioned {
 	$db_password = extlookup("mail::gateway::password")
 	$db_database = extlookup("mail::gateway::database")
 
-	$interfaces = extlookup("mail::delivery::interfaces", undef)
+	$interfaces = extlookup("mail::delivery::interfaces", "")
 
 	$etc = "/etc/postfix-gateway"
 
