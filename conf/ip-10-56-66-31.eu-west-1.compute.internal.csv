@@ -1,2 +1,6 @@
 roles::mail::gateway,1
 mail::gateway::index,2
+mail::gateway::hosts,prowler.cs278.org
+mail::gateway::username,testmail
+mail::gateway::password,GTaQ3VdH9CYhKtQu
+mail::gateway::database,system_email
