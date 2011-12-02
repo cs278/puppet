@@ -3,6 +3,9 @@ class mail::package {
 		["postfix", "postfix-cdb", "postfix-pcre"]:
 			ensure => latest,
 		;
+		"swaks":
+			ensure => present,
+		;
 	}
 
 	$apply_fix = $lsbdistcodename ? {
