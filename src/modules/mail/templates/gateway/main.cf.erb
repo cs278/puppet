@@ -64,8 +64,9 @@ disable_vrfy_command = yes
 milter_default_action = accept
 append_dot_mydomain = no
 recipient_delimiter = +
-relay_domains = cdb:${config_directory}/maps/domains
-relay_recipient_maps = cdb:${config_directory}/maps/recipients
+
+relay_domains = mysql:${config_directory}/mysql/domains.cf
+relay_recipient_maps = mysql:${config_directory}/mysql/recipients.cf
 relay_transport = smtp:[delivery.mail.cs278.org]
 
 smtpd_client_restrictions = 

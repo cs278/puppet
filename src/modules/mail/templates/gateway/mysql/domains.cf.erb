@@ -1,0 +1,8 @@
+hosts    = <%= db_hosts %>
+user     = <%= db_username %>
+password = <%= db_password %>
+dbname   = <%= db_database %>
+query    = \
+	SELECT domain \
+		FROM domains \
+		WHERE domain = '%s'
