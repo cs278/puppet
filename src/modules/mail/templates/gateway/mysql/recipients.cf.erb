@@ -2,27 +2,27 @@ hosts    = <%= db_hosts %>
 user     = <%= db_username %>
 password = <%= db_password %>
 dbname   = <%= db_database %>
-query    = \
-	SELECT 1 \
-		FROM aliases AS a \
-		LEFT JOIN domains AS d \
-			ON (a.domain_id = d.id) \
-		WHERE a.source = '%u' \
-			AND d.domain = '%d' \
-		LIMIT 1 \
-	UNION \
-	SELECT GROUP_CONCAT(a.destination SEPARATOR ', ') AS destination \
-		FROM aliases AS a \
-		LEFT JOIN domains AS d \
-			ON (a.domain_id = d.id) \
-		WHERE a.source = '' \
-			AND d.domain = '%d' \
-		LIMIT 1 \
-	UNION \
-	SELECT 1 \
-		FROM users AS u \
-		LEFT JOIN domains AS d \
-			ON (u.domain_id = d.id) \
-		WHERE d.domain = '%d' \
-			AND u.username = '%u' \
+query    =
+	SELECT 1
+		FROM aliases AS a
+		LEFT JOIN domains AS d
+			ON (a.domain_id = d.id)
+		WHERE a.source = '%u'
+			AND d.domain = '%d'
+		LIMIT 1
+	UNION
+	SELECT GROUP_CONCAT(a.destination SEPARATOR ', ') AS destination
+		FROM aliases AS a
+		LEFT JOIN domains AS d
+			ON (a.domain_id = d.id)
+		WHERE a.source = ''
+			AND d.domain = '%d'
+		LIMIT 1
+	UNION
+	SELECT 1
+		FROM users AS u
+		LEFT JOIN domains AS d
+			ON (u.domain_id = d.id)
+		WHERE d.domain = '%d'
+			AND u.username = '%u'
 		LIMIT 1

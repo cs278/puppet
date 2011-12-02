@@ -2,7 +2,7 @@ hosts    = <%= db_hosts %>
 user     = <%= db_username %>
 password = <%= db_password %>
 dbname   = <%= db_database %>
-query    = \
-	SELECT transport \
-		FROM domains \
+query    =
+	SELECT transport
+		FROM domains
 		WHERE domain = '%s'

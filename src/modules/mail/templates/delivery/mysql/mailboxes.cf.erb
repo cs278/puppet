@@ -2,10 +2,10 @@ hosts    = <%= db_hosts %>
 user     = <%= db_username %>
 password = <%= db_password %>
 dbname   = <%= db_database %>
-query    = \
-	SELECT CONCAT(d.domain, '/', u.username, '/') AS maildir \
-		FROM users AS u \
-		LEFT JOIN domains AS d \
-			ON (u.domain_id = d.id) \
-		WHERE d.domain = '%d' \
+query    =
+	SELECT CONCAT(d.domain, '/', u.username, '/') AS maildir
+		FROM users AS u
+		LEFT JOIN domains AS d
+			ON (u.domain_id = d.id)
+		WHERE d.domain = '%d'
 			AND u.username = '%u'
