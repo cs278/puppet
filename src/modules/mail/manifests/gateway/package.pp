@@ -1,5 +1,6 @@
 class mail::gateway::package {
 	include mail::package
+	include mail::mysql
 
 	package {
 		"postfix-policyd-spf-python":
