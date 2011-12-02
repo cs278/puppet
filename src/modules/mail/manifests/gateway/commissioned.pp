@@ -2,6 +2,7 @@ class mail::gateway::commissioned {
 	include mail::gateway::package
 
 	$index = extlookup("mail::gateway::index")
+	$hub = extlookup("mail::gateway::hub")
 
 	$db_hosts = extlookup("mail::gateway::hosts")
 	$db_username = extlookup("mail::gateway::username")

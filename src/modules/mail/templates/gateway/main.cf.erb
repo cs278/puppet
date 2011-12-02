@@ -73,7 +73,7 @@ recipient_delimiter = +
 
 relay_domains = proxy:mysql:${config_directory}/mysql/domains.cf
 relay_recipient_maps = proxy:mysql:${config_directory}/mysql/recipients.cf
-relay_transport = smtp:[delivery.mail.cs278.org]
+relay_transport = smtp:[<%= hub %>]
 
 smtpd_client_restrictions = 
 #	check_client_access cdb:${config_directory}/access/client,
