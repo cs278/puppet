@@ -47,6 +47,9 @@ smtp_data_done_timeout = 1200s
 #
 smtpd_client_port_logging = no
 
+<%- if has_variable?("interfaces") && interfaces then -%>
+inet_interfaces = <%= interfaces %>
+<%- end -%>
 myhostname = mx<%= index %>.$mydomain
 mynetworks =
 

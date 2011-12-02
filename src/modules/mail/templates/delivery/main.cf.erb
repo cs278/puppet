@@ -11,6 +11,9 @@ authorized_submit_users =
 #
 local_header_rewrite_clients =
 
+<%- if has_variable?("interfaces") && interfaces then -%>
+inet_interfaces = <%= interfaces %>
+<%- end -%>
 myhostname = delivery.mail.$mydomain
 mynetworks =
 

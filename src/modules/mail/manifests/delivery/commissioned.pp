@@ -10,6 +10,8 @@ class mail::delivery::commissioned {
 	$db_password = extlookup("mail::delivery::password")
 	$db_database = extlookup("mail::delivery::database")
 
+	$interfaces = extlookup("mail::delivery::interfaces", undef)
+
 	user {
 		"mail":
 			ensure  => present,
