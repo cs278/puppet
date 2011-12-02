@@ -4,3 +4,9 @@ mail::gateway::hosts,prowler.cs278.org
 mail::gateway::username,testmail
 mail::gateway::password,GTaQ3VdH9CYhKtQu
 mail::gateway::database,system_email
+
+roles::mail::delivery,1
+mail::delivery::hosts,prowler.cs278.org
+mail::delivery::username,testmail
+mail::delivery::password,GTaQ3VdH9CYhKtQu
+mail::delivery::database,system_email
