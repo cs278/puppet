@@ -11,6 +11,9 @@ authorized_submit_users =
 #
 local_header_rewrite_clients =
 
+# Permit proxymap lookups
+proxy_read_maps = mysql:${config_directory}/mysql/domains.cf, mysql:${config_directory}/mysql/recipients.cf
+
 # All recipients of not yet filtered email go to the same filter together.
 #
 # With multiple instances, the content-filter is specified
@@ -65,8 +68,8 @@ milter_default_action = accept
 append_dot_mydomain = no
 recipient_delimiter = +
 
-relay_domains = mysql:${config_directory}/mysql/domains.cf
-relay_recipient_maps = mysql:${config_directory}/mysql/recipients.cf
+relay_domains = proxy:mysql:${config_directory}/mysql/domains.cf
+relay_recipient_maps = proxy:mysql:${config_directory}/mysql/recipients.cf
 relay_transport = smtp:[delivery.mail.cs278.org]
 
 smtpd_client_restrictions = 
