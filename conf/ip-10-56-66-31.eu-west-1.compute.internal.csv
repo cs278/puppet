@@ -1,5 +1,6 @@
 roles::mail::gateway,1
 mail::gateway::index,2
+mail::gateway::interfaces,46.137.32.252
 mail::gateway::hub,127.0.0.1
 mail::gateway::hosts,prowler.cs278.org
 mail::gateway::username,testmail
@@ -7,7 +8,7 @@ mail::gateway::password,GTaQ3VdH9CYhKtQu
 mail::gateway::database,system_email
 
 roles::mail::delivery,1
-mail::delivery::interfaces,127.0.0.2
+mail::delivery::interfaces,127.0.0.1
 mail::delivery::hosts,prowler.cs278.org
 mail::delivery::username,testmail
 mail::delivery::password,GTaQ3VdH9CYhKtQu
