@@ -12,7 +12,7 @@ authorized_submit_users =
 local_header_rewrite_clients =
 
 # Permit proxymap lookups
-proxy_read_maps = mysql:${config_directory}/mysql/domains.cf, mysql:${config_directory}/mysql/recipients.cf
+proxy_read_maps = $relay_domains $relay_recipient_maps
 
 # All recipients of not yet filtered email go to the same filter together.
 #
