@@ -11,7 +11,7 @@ query    =
 			AND d.domain = '%d'
 		LIMIT 1
 	UNION
-	SELECT GROUP_CONCAT(a.destination SEPARATOR ', ') AS destination
+	SELECT 1
 		FROM aliases AS a
 		LEFT JOIN domains AS d
 			ON (a.domain_id = d.id)
