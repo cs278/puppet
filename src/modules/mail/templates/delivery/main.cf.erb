@@ -46,7 +46,7 @@ transport_maps = proxy:mysql:$config_directory/mysql/transport.cf
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 virtual_alias_maps = proxy:mysql:$config_directory/mysql/aliases.cf
-virtual_mailbox_domains = mysql:$config_directory/mysql/domains.cf
+virtual_mailbox_domains = proxy:mysql:$config_directory/mysql/domains.cf
 virtual_mailbox_base = <%= vmail_store %>
 virtual_mailbox_maps = proxy:mysql:$config_directory/mysql/mailboxes.cf
 virtual_minimum_uid = 1
