@@ -11,6 +11,9 @@ authorized_submit_users =
 #
 local_header_rewrite_clients =
 
+# Permit proxymap lookups
+proxy_read_maps = $transport_maps $virtual_alias_maps $virtual_mailbox_domains $virtual_mailbox_maps
+
 <%- if has_variable?("interfaces") && interfaces then -%>
 inet_interfaces = <%= interfaces %>
 <%- end -%>
@@ -39,13 +42,13 @@ recipient_delimiter = +
 message_size_limit = 52428800
 mailbox_size_limit = 0
 
-transport_maps = mysql:$config_directory/mysql/transport.cf
+transport_maps = proxy:mysql:$config_directory/mysql/transport.cf
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
-virtual_alias_maps = mysql:$config_directory/mysql/aliases.cf
+virtual_alias_maps = proxy:mysql:$config_directory/mysql/aliases.cf
 virtual_mailbox_domains = mysql:$config_directory/mysql/domains.cf
 virtual_mailbox_base = <%= vmail_store %>
-virtual_mailbox_maps = mysql:$config_directory/mysql/mailboxes.cf
+virtual_mailbox_maps = proxy:mysql:$config_directory/mysql/mailboxes.cf
 virtual_minimum_uid = 1
 virtual_uid_maps = static:<%= vmail_uid %>
 virtual_gid_maps = static:<%= vmail_gid %>
