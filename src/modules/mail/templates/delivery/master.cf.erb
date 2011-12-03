@@ -40,4 +40,4 @@ scache    unix  -       -       -       -       1       scache
 # Adds X-Original-To and Delivered-To Headers
 # <http://www.dovecot.org/list/dovecot/2006-December/018115.html>
 dovecot   unix  -       n       n       -       -       pipe
-  flags=ODRhu user=mail:mail argv=/usr/lib/dovecot/deliver -f ${sender} -a ${recipient} -d ${user}@${domain}
+  flags=ODRhu user=mail:mail argv=/usr/lib/dovecot/dovecot-lda -f ${sender} -a ${recipient} -d ${user}@${domain}
