@@ -126,7 +126,7 @@ password_query = \
 
 # According to postix/src/util/split_at.c the first instance of the recipient delimiter is the cut off point
 user_query = \
-	SELECT CONCAT('<%= vmail_store %>', d.domain, '/', u.username, '/') AS home, <%= vmail_uid %> AS uid, <%= vmail_gid %> AS gid \
+	SELECT CONCAT('<%= vmail_store %>/', d.domain, '/', u.username) AS home, <%= vmail_uid %> AS uid, <%= vmail_gid %> AS gid \
 	FROM users AS u \
 		LEFT JOIN domains AS d ON (u.domain_id = d.id) \
 	WHERE d.domain = '%d' \
