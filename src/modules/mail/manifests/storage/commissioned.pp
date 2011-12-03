@@ -90,12 +90,12 @@ class mail::storage::commissioned {
 			content => template("mail/storage/conf.d/15-lda.conf.erb"),
 			require => File[$etc_dovecot],
 		;
-		"${etc_dovecot}/conf.d/auth-sql.conf":
+		"${etc_dovecot}/auth.d/auth-sql.conf":
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			content => template("mail/storage/conf.d/auth-sql.conf.erb"),
+			content => template("mail/storage/auth.d/auth-sql.conf.erb"),
 			require => File[$etc_dovecot],
 		;
 
