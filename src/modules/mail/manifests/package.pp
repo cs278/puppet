@@ -8,7 +8,7 @@ class mail::package {
 		;
 	}
 
-	$apply_fix = $lsbdistcodename ? {
+	$apply_fix = $::lsbdistcodename ? {
 		"natty"    => true,
 		"maverick" => true,
 		"lucid"    => true,

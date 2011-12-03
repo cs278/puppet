@@ -7,7 +7,7 @@ class puppet::respository {
 		;
 	}
 
-	$dist = $lsbdistid ? {
+	$dist = $::lsbdistid ? {
 		'Debian' => 'debian',
 		'Ubuntu' => 'ubuntu',
 	}
@@ -15,7 +15,7 @@ class puppet::respository {
 	apt::sources_list {
 		"puppetlabs":
 			ensure  => present,
-			content => "deb http://apt.puppetlabs.com/${dist} ${lsbdistcodename} main",
+			content => "deb http://apt.puppetlabs.com/${dist} ${::lsbdistcodename} main",
 			require => Apt::Key["4BD6EC30"],
 		;
 	}
