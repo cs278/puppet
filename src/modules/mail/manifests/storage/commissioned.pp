@@ -28,7 +28,7 @@ class mail::storage::commissioned {
 			force   => true,
 			owner   => root,
 			group   => root,
-			source  => "puppet:///mail/storage/dovecot",
+			source  => "puppet:///modules/mail/storage/dovecot",
 			require => Class["mail::storage::package"],
 		;
 		"${etc_dovecot}/dovecot.conf":
