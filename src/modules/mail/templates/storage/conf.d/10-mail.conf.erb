@@ -180,8 +180,8 @@ mail_gid = <%= vmail_gid %>
 # to make sure that users can't log in as daemons or other system users.
 # Note that denying root logins is hardcoded to dovecot binary and can't
 # be done even if first_valid_uid is set to 0.
-#first_valid_uid = 500
-#last_valid_uid = 0
+first_valid_uid = <%= vmail_uid %>
+last_valid_uid = <%= vmail_uid %>
 
 # Valid GID range for users, defaults to non-root/wheel. Users having
 # non-valid GID as primary group ID aren't allowed to log in. If user
