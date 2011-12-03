@@ -2,7 +2,11 @@ class mail::main($instances = []) {
 	include mail::package
 	include mail::service
 
-	$myhostname = $::fqdn
+	if $::ec2_public_hostname {
+		$myhostname = $::ec2_public_hostname
+	} else {
+		$myhostname = $::fqdn
+	}
 	$mydomain = "cs278.org"
 	$hub = "hub.mail.cs278.org"
 
