@@ -1,5 +1,6 @@
 class mail::storage::commissioned {
 	include mail::storage::package
+	include mail::storage::service
 
 	$vmail_store = extlookup("mail::storage::store")
 
