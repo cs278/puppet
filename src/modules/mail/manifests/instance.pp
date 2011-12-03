@@ -27,7 +27,6 @@ define mail::instance($master, $main) {
 			owner   => postfix,
 			group   => postfix,
 			mode    => 0755,
-			require => $require,
 		;
 		"${config}/dynamicmaps.cf":
 			ensure  => link,
