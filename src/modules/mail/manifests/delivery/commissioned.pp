@@ -1,14 +1,5 @@
-class mail::delivery::commissioned {
+class mail::delivery::commissioned inherits mail::storage::commissioned {
 	include mail::delivery::package
-
-	$vmail_store = extlookup("mail::delivery::store")
-	$vmail_uid = extlookup("mail::delivery::uid")
-	$vmail_gid = extlookup("mail::delivery::gid")
-
-	$db_hosts = extlookup("mail::delivery::hosts")
-	$db_username = extlookup("mail::delivery::username")
-	$db_password = extlookup("mail::delivery::password")
-	$db_database = extlookup("mail::delivery::database")
 
 	$interfaces = extlookup("mail::delivery::interfaces", "")
 

@@ -9,7 +9,7 @@ mail::gateway::database,system_email
 
 roles::mail::delivery,1
 mail::delivery::interfaces,127.0.0.1
-mail::delivery::hosts,prowler.cs278.org
-mail::delivery::username,testmail
-mail::delivery::password,GTaQ3VdH9CYhKtQu
-mail::delivery::database,system_email
+mail::storage::hosts,prowler.cs278.org
+mail::storage::username,testmail
+mail::storage::password,GTaQ3VdH9CYhKtQu
+mail::storage::database,system_email

@@ -2,9 +2,9 @@ timezone,Europe/London
 mail::domain,cs278.org
 mail::postmaster,postmaster@cs278.org
 mail::gateway::hub,delivery.mail.cs278.org
-mail::delivery::uid,8
-mail::delivery::gid,8
-mail::delivery::store,/var/mail
-mail::delivery::hosts,127.0.0.1
-mail::delivery::username,system-email
-mail::delivery::database,system_email
+mail::storage::uid,8
+mail::storage::gid,8
+mail::storage::store,/var/mail
+mail::storage::hosts,127.0.0.1
+mail::storage::username,system-email
+mail::storage::database,system_email
