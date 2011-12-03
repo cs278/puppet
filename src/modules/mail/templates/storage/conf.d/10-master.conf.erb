@@ -79,9 +79,9 @@ service auth {
   # permissions. Users that have access to this socket are able to get a list
   # of all usernames and get results of everyone's userdb lookups.
   unix_listener auth-userdb {
-    #mode = 0600
+    mode = 0660
     #user = 
-    #group = 
+    group = <%= vmail_group %>
   }
 
   # Postfix smtp-auth
