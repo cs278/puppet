@@ -97,6 +97,7 @@ class mail::delivery::commissioned {
 				ensure  => symlink,
 				target  => $vmail_store,
 				replace => true,
+				force   => true,
 			;
 		}
 	}
