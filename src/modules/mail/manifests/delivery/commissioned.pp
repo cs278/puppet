@@ -90,4 +90,14 @@ class mail::delivery::commissioned {
 			content => template("mail/delivery/mysql/transport.cf.erb"),
 		;
 	}
+
+	if $vmail_store != "/var/spool/mail" {
+		file {
+			"/var/spool/mail":
+				ensure  => symlink,
+				target  => $vmail_store,
+				replace => true,
+			;
+		}
+	}
 }
