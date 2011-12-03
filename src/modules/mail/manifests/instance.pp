@@ -34,6 +34,7 @@ define mail::instance($master, $main) {
 			group   => root,
 			target  => "/etc/postfix/dynamicmaps.cf",
 			require => [Class["mail::package"], File["/etc/postfix-${name}"]],
+			notify  => Class["mail::service"],
 		;
 		"${config}/master.cf":
 			ensure  => file,
@@ -42,6 +43,7 @@ define mail::instance($master, $main) {
 			mode    => 0444,
 			content => $master,
 			require => File["/etc/postfix-${name}"],
+			notify  => Class["mail::service"],
 		;
 		"${config}/main.cf":
 			ensure  => file,
@@ -50,6 +52,7 @@ define mail::instance($master, $main) {
 			mode    => 0444,
 			content => template("mail/main.instance.cf.erb"),
 			require => File["/etc/postfix-${name}"],
+			notify  => Class["mail::service"],
 		;
 	}
 }
