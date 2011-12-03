@@ -1,6 +1,6 @@
 roles::mail::gateway,1
 mail::gateway::index,2
-mail::gateway::interfaces,10.56.66.31
+mail::gateway::interfaces,10.228.238.71
 mail::gateway::hub,127.0.0.1
 mail::gateway::hosts,prowler.cs278.org
 mail::gateway::username,testmail
