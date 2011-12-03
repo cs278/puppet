@@ -1,5 +1,5 @@
 define aptx::ppa($ensure = present) {
-	if $lsbdistid != 'Ubuntu' {
+	if $::lsbdistid != 'Ubuntu' {
 		fail('aptx::ppa() can only be used on Ubuntu.')
 	}
 
@@ -10,7 +10,7 @@ define aptx::ppa($ensure = present) {
 	}
 
 	$filename = gsub($name, '/', '-')
-	$file = "/etc/apt/sources.list.d/${filename}-${lsbdistcodename}.list"
+	$file = "/etc/apt/sources.list.d/${filename}-${::lsbdistcodename}.list"
 
 	debug($file)
 

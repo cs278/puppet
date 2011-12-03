@@ -4,7 +4,7 @@
 # if it is possible to get it, but we don't actually care that much.
 
 define aptx::ppaif($ensure = present) {
-	if $lsbdistid == 'Ubuntu' {
+	if $::lsbdistid == 'Ubuntu' {
 		aptx::ppa {
 			"$name":
 				ensure => $ensure,
