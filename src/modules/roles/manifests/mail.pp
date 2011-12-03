@@ -1,35 +1,37 @@
 class roles::mail {
-	if has_role("mail::gateway") and has_role("mail::delivery") {
+	$instances = []
+
+	include roles::mail::gateway
+	include roles::mail::delivery
+	include roles::mail::frontend
+
+	class {
+		"mail::main":
+			instances => $instances,
+		;
+	}
+}
+
+class roles::mail::gateway {
+	if has_role("mail::gateway") {
 		include mail::gateway::commissioned
+
+		$roles::mail::instances += [Class["mail::gateway::commissioned"]]
+	}
+}
+
+class roles::mail::delivery {
+	if has_role("mail::delivery") {
 		include mail::delivery::commissioned
 
-		class {
-			"mail::main":
-				instances => [
-					Class["mail::gateway::commissioned"],
-					Class["mail::delivery::commissioned"],
-				],
-			;
-		}
-	} elsif has_role("mail::gateway") {
-		include mail::gateway::commissioned
+		$roles::mail::instances += [Class["mail::delivery::commissioned"]]
+	}
+}
 
-		class {
-			"mail::main":
-				instances => [
-					Class["mail::gateway::commissioned"],
-				],
-			;
-		}
-	} elsif has_role("mail::delivery") {
-		include mail::delivery::commissioned
+class roles::mail::frontend {
+	if has_role("mail::frontend") {
+		include mail::frontend::commissioned
 
-		class {
-			"mail::main":
-				instances => [
-					Class["mail::delivery::commissioned"],
-				],
-			;
-		}
+		$roles::mail::instances += [Class["mail::frontend::commissioned"]]
 	}
 }
