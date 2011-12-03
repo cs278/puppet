@@ -2,8 +2,12 @@ class mail::storage::commissioned {
 	include mail::storage::package
 
 	$vmail_store = extlookup("mail::storage::store")
+
+	# TODO: Specify user/groupname and create it
 	$vmail_uid = extlookup("mail::storage::uid")
 	$vmail_gid = extlookup("mail::storage::gid")
+	$vmail_user = getuserbyuid($vmail_uid)
+	$vmail_group = getuserbyuid($vmail_gid)
 
 	$db_hosts = extlookup("mail::storage::hosts")
 	$db_username = extlookup("mail::storage::username")
