@@ -30,6 +30,9 @@ then
 	echo "Failed to install puppet." >&2
 fi
 
+# Ensure dead if the package was installed
+rm -rf "$conf"
+
 git init -q "$conf" &&
 cd "$conf" &&
 git pull file://"$repo" &&
