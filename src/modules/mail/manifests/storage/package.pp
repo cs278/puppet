@@ -4,11 +4,4 @@ class mail::storage::package {
 			ensure => latest,
 		;
 	}
-
-	service {
-		"dovecot":
-			ensure  => running,
-			require => Package["dovecot-common"],
-		;
-	}
 }

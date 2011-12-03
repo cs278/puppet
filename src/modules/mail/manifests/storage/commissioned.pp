@@ -37,6 +37,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/dovecot.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/dovecot-sql.conf":
 			ensure  => file,
@@ -45,6 +46,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/dovecot-sql.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/conf.d/10-auth.conf":
 			ensure  => file,
@@ -53,6 +55,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/conf.d/10-auth.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/conf.d/10-logging.conf":
 			ensure  => file,
@@ -61,6 +64,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/conf.d/10-logging.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/conf.d/10-mail.conf":
 			ensure  => file,
@@ -69,6 +73,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/conf.d/10-mail.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/conf.d/10-master.conf":
 			ensure  => file,
@@ -77,6 +82,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/conf.d/10-master.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/conf.d/10-ssl.conf":
 			ensure  => file,
@@ -85,6 +91,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/conf.d/10-ssl.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/conf.d/15-lda.conf":
 			ensure  => file,
@@ -93,6 +100,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/conf.d/15-lda.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
 		"${etc_dovecot}/auth.d/auth-sql.conf":
 			ensure  => file,
@@ -101,7 +109,7 @@ class mail::storage::commissioned {
 			group   => root,
 			content => template("mail/storage/auth.d/auth-sql.conf.erb"),
 			require => File[$etc_dovecot],
+			notify  => Class["mail::storage::service"],
 		;
-
 	}
 }
