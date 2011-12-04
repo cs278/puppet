@@ -8,6 +8,7 @@ define mail::instance($master, $main) {
 	$queue = "/var/spool/${ident}"
 	$data = "/var/lib/${ident}"
 	$domain = "cs278.org"
+	$postmaster = extlookup("mail::postmaster")
 
 	file {
 		"${config}":

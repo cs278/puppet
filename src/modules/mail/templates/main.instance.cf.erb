@@ -10,7 +10,7 @@ mydomain = <%= domain %>
 
 <%= main %>
 
-smtpd_banner = $myhostname ($multi_instance_group) NO UCE ESMTP $mail_name (<%= scope.lookupvar('::lsbdistid') %>/<%= scope.lookupvar('lsbdistrelease') %>) <postmaster@<%= domain %>>
+smtpd_banner = $myhostname ($multi_instance_group) NO UCE ESMTP $mail_name (<%= scope.lookupvar('::lsbdistid') %>/<%= scope.lookupvar('::lsbdistrelease') %>) <<%= postmaster %>>
 smtpd_helo_required = yes
 smtpd_soft_error_limit = 5
 smtpd_hard_error_limit = 10
