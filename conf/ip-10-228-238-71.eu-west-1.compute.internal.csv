@@ -13,3 +13,5 @@ mail::storage::hosts,prowler.cs278.org
 mail::storage::username,testmail
 mail::storage::password,GTaQ3VdH9CYhKtQu
 mail::storage::database,system_email
+
+roles::mail::frontend,1
