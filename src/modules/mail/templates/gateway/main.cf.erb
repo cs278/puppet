@@ -120,7 +120,7 @@ smtpd_recipient_restrictions =
 #	check_recipient_access cdb:${config_directory}/access/whitelist-recipient,
 #	check_sender_access cdb:${config_directory}/access/whitelist-sender,
 
-#	check_policy_service unix:private/spf,
+	check_policy_service unix:private/spf,
 
 	permit
 

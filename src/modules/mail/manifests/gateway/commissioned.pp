@@ -13,11 +13,32 @@ class mail::gateway::commissioned {
 
 	$etc = "/etc/postfix-gateway"
 
+	group {
+		"policyd-spf":
+			ensure => present,
+			system => true,
+		;
+	}
+
+	user {
+		"policyd-spf":
+			ensure   => present,
+			gid      => "policyd-spf",
+			home     => "/home/policyd-spf",
+			shell    => "/bin/false",
+			password => '*',
+			system   => true,
+		;
+	}
+
 	mail::instance {
 		"gateway":
 			master  => template("mail/gateway/master.cf.erb"),
 			main    => template("mail/gateway/main.cf.erb"),
-			require => Class["mail::gateway::package"],
+			require => [
+				Class["mail::gateway::package"],
+				User["policyd-spf"],
+			],
 		;
 	}
 
