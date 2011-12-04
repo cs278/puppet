@@ -6,6 +6,7 @@ include common
 include apt
 include base
 include timezone
+include ntp
 
 Exec {
 	path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
