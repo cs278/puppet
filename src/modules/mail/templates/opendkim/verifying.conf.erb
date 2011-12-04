@@ -625,7 +625,7 @@ Mode			v
 ##  inet:port			to listen on all interfaces
 ##  local:/path/to/socket	to listen on a UNIX domain socket
 
-Socket			local:/var/run/opendkim/opendkim.sock
+Socket			inet:8892@127.0.0.1
 
 ##  StrictHeaders { yes | no }
 ##  	default "no"
