@@ -68,6 +68,9 @@ parent_domain_matches_subdomains =
 strict_rfc821_envelopes = yes
 disable_vrfy_command = yes
 milter_default_action = accept
+milter_protocol = 2
+smtpd_milters = unix:/var/run/opendkim/opendkim.sock
+non_smtpd_milters = unix:/var/run/opendkim/opendkim.sock
 append_dot_mydomain = no
 recipient_delimiter = +
 

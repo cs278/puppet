@@ -1,5 +1,6 @@
 class mail::gateway::commissioned {
 	include mail::gateway::package
+	include mail::opendkim::verifying
 
 	$index = extlookup("mail::gateway::index")
 	$hub = extlookup("mail::gateway::hub")
@@ -37,6 +38,7 @@ class mail::gateway::commissioned {
 			main    => template("mail/gateway/main.cf.erb"),
 			require => [
 				Class["mail::gateway::package"],
+				Class["mail::opendkim::verifying"],
 				User["policyd-spf"],
 			],
 		;
