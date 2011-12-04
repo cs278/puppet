@@ -31,7 +31,5 @@ class roles::mail::delivery {
 class roles::mail::frontend {
 	if has_role("mail::frontend") {
 		include mail::frontend::commissioned
-
-		$roles::mail::instances += Class["mail::frontend::commissioned"]
 	}
 }
