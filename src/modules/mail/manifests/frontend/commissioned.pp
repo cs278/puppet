@@ -7,7 +7,7 @@ class mail::frontend::commissioned inherits mail::storage::commissioned {
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			content => template("mail/storage/conf.d/20-imap.conf.erb"),
+			content => template("mail/frontend/dovecot/conf.d/20-imap.conf.erb"),
 			require => File[$etc_dovecot],
 			notify  => Class["mail::storage::service"],
 		;
@@ -16,7 +16,7 @@ class mail::frontend::commissioned inherits mail::storage::commissioned {
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			content => template("mail/storage/conf.d/20-managesieve.conf.erb"),
+			content => template("mail/frontend/dovecot/conf.d/20-managesieve.conf.erb"),
 			require => File[$etc_dovecot],
 			notify  => Class["mail::storage::service"],
 		;
