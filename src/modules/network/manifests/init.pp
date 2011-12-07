@@ -15,7 +15,7 @@ class network {
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			content => $hostname,
+			content => "${hostname}\n",
 		;
 	}
 }
