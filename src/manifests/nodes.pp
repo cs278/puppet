@@ -5,6 +5,7 @@ $extlookup_precedence = ["private/${::fqdn}", "private/common", "${::fqdn}", "co
 include common
 include apt
 include base
+include network
 include timezone
 include ntp
 
