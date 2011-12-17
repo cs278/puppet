@@ -4,7 +4,7 @@ define mail::instance::config::file($path = $name, $instance, $ensure = present,
 	validate_string($path)
 	validate_string($instance)
 	validate_string($ensure)
-	validate_int($mode)
+	#validate_int($mode)
 	validate_string($owner)
 	validate_string($group)
 	validate_string($content)
