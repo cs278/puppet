@@ -16,10 +16,18 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 			mode    => $mode,
 			owner   => $owner,
 			group   => $group,
-			content => $content,
-			source  => $source,
 			replace => $replace,
 			force   => $force,
 		;
+	}
+
+	if $content != "" {
+		File[$path] {
+			content +> $content,
+		}
+	} elsif $source != "" {
+		File[$path] {
+			source +> $source,
+		}
 	}
 }
