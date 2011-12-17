@@ -56,4 +56,7 @@ define mail::instance($master, $main) {
 			notify  => Class["mail::service"],
 		;
 	}
+
+	Mail::Instance::Config::File <| instance == $name |>
+	Mail::Instance::File <| instance == $name |>
 }
