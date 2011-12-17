@@ -1,4 +1,4 @@
-define mail::instance($master, $main) {
+define mail::instance($ensure = present, $master, $main) {
 
 	if ($group == "") {
 		$group = $name
@@ -12,25 +12,37 @@ define mail::instance($master, $main) {
 
 	file {
 		"${config}":
-			ensure  => directory,
+			ensure  => $ensure ? {
+				"absent" => absent,
+				default  => directory,
+			},
 			owner   => root,
 			group   => root,
 			mode    => 0555,
 		;
 		"${queue}":
-			ensure  => directory,
+			ensure  => $ensure ? {
+				"absent" => absent,
+				default  => directory,
+			},
 			owner   => root,
 			group   => root,
 			mode    => 0755,
 		;
 		"${data}":
-			ensure  => directory,
+			ensure  => $ensure ? {
+				"absent" => absent,
+				default  => directory,
+			},
 			owner   => postfix,
 			group   => postfix,
 			mode    => 0755,
 		;
 		"${config}/dynamicmaps.cf":
-			ensure  => link,
+			ensure  => $ensure ? {
+				"absent" => absent,
+				default  => link,
+			},
 			owner   => root,
 			group   => root,
 			target  => "/etc/postfix/dynamicmaps.cf",
@@ -38,7 +50,10 @@ define mail::instance($master, $main) {
 			notify  => Class["mail::service"],
 		;
 		"${config}/master.cf":
-			ensure  => file,
+			ensure  => $ensure ? {
+				"absent" => absent,
+				default  => file,
+			},
 			owner   => root,
 			group   => root,
 			mode    => 0444,
@@ -47,7 +62,10 @@ define mail::instance($master, $main) {
 			notify  => Class["mail::service"],
 		;
 		"${config}/main.cf":
-			ensure  => file,
+			ensure  => $ensure ? {
+				"absent" => absent,
+				default  => file,
+			},
 			owner   => root,
 			group   => root,
 			mode    => 0444,
