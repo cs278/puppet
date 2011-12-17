@@ -14,16 +14,17 @@ define mail::instance::config::file($path = $name, $instance, $ensure = present,
 
 	mail::instance::file {
 		"/etc/postfix-${instance}/${path}":
-			ensure  => $ensure,
-			mode    => $mode,
-			owner   => $owner,
-			group   => $group,
-			content => $content,
-			source  => $source,
-			replace => $replace,
-			force   => $force,
-			require => Mail::Instance[$instance],
-			notify  => Class["mail::service"],
+			instance => $instance,
+			ensure   => $ensure,
+			mode     => $mode,
+			owner    => $owner,
+			group    => $group,
+			content  => $content,
+			source   => $source,
+			replace  => $replace,
+			force    => $force,
+			require  => Mail::Instance[$instance],
+			notify   => Class["mail::service"],
 		;
 	}
 }
