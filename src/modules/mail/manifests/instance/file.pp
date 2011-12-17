@@ -1,4 +1,4 @@
-define mail::instance::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "") {
+define mail::instance::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "", $replace = false, $force = false) {
 	validate_string($path)
 	validate_string($instance)
 	validate_string($ensure)
@@ -7,6 +7,8 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 	validate_string($group)
 	validate_string($content)
 	validate_string($source)
+	validate_bool($replace)
+	validate_bool($bool)
 
 	file {
 		"${path}":
@@ -16,6 +18,8 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 			group   => $group,
 			content => $content,
 			source  => $source,
+			replace => $replace,
+			force   => $force,
 		;
 	}
 }
