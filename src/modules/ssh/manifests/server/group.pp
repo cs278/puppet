@@ -11,7 +11,7 @@ define ssh::server::group($groupname = $name, $allow, $config = "") {
 		false => "deny",
 	}
 
-	$path = "/etc/ssh/${dir}-groups.d/${username}"
+	$path = "/etc/ssh/${dir}-groups.d/${groupname}"
 
 	file {
 		"${path}":
