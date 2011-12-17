@@ -1,4 +1,6 @@
 define mail::instance::config::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "", $replace = false, $force = false) {
+	include mail::service
+
 	validate_string($path)
 	validate_string($instance)
 	validate_string($ensure)
@@ -20,6 +22,8 @@ define mail::instance::config::file($path = $name, $instance, $ensure = present,
 			source  => $source,
 			replace => $replace,
 			force   => $force,
+			require => Mail::Instance[$instance],
+			notify  => Class["mail::service"],
 		;
 	}
 }
