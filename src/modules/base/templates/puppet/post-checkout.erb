@@ -19,6 +19,8 @@ then
 	exit 0
 fi
 
+git submodule update --init --recursive
+
 if [ -x bin/apply ];
 then
 	sudo -n bin/apply
