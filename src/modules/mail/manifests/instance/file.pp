@@ -8,7 +8,7 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 	validate_string($content)
 	validate_string($source)
 	validate_bool($replace)
-	validate_bool($bool)
+	validate_bool($force)
 
 	file {
 		"${path}":

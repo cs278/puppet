@@ -10,7 +10,7 @@ define mail::instance::config::file($path = $name, $instance, $ensure = present,
 	validate_string($content)
 	validate_string($source)
 	validate_bool($replace)
-	validate_bool($bool)
+	validate_bool($force)
 
 	mail::instance::file {
 		"/etc/postfix-${instance}/${path}":
