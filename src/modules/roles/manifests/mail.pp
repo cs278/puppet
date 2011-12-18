@@ -3,6 +3,8 @@ class roles::mail {
 
 	if has_role("mail::gateway") {
 		include mail::gateway::commissioned
+	} else {
+		include mail::gateway::decommissioned
 	}
 
 	if has_role("mail::delivery") {
