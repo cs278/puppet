@@ -1,3 +1,7 @@
+network::interface::primary::address,178.79.179.205
+network::interface::primary::netmask,255.255.255.0
+network::interface::primary::gateway,178.79.179.1
+
 roles::mail::gateway,1
 mail::gateway::index,2
 mail::gateway::interfaces,178.79.179.205
