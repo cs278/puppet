@@ -15,3 +15,4 @@ mail::storage::password,GTaQ3VdH9CYhKtQu
 mail::storage::database,system_email
 
 roles::mail::frontend,1
+roles::mail::relay,1
