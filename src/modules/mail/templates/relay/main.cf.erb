@@ -14,24 +14,6 @@ local_header_rewrite_clients =
 # Permit proxymap lookups
 proxy_read_maps =
 
-# Pass original client log information through the filter.
-#
-smtp_send_xforward_command = yes
-
-# Avoid splitting the envelope and scanning messages multiple times.
-# Match the re-injection server's recipient limit.
-#
-smtp_destination_recipient_limit = 1000
-
-# Tolerate occasional high latency in the content filter.
-#
-smtp_data_done_timeout = 1200s
-
-# With xforward, match the output instance setting, if you
-# want "yes", set both to "yes".
-#
-smtpd_client_port_logging = no
-
 <%- if has_variable?("interfaces") && !interfaces.empty? then -%>
 inet_interfaces = <%= interfaces %>
 <%- end -%>
