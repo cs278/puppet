@@ -2,6 +2,7 @@ class mail::relay::commissioned inherits mail::storage::commissioned  {
 	include mail::relay::package
 	include mail::storage::service
 
+	$myhostname = extlookup("mail::relay")
 	$interfaces = extlookup("mail::relay::interfaces", "")
 
 	$instance = "relay"

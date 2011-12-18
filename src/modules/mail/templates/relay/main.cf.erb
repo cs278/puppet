@@ -35,7 +35,7 @@ smtpd_client_port_logging = no
 <%- if has_variable?("interfaces") && !interfaces.empty? then -%>
 inet_interfaces = <%= interfaces %>
 <%- end -%>
-myhostname = relay.$mydomain
+myhostname = $myhostname
 mynetworks =
 
 # Public SMTP server options
