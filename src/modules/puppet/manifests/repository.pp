@@ -1,4 +1,4 @@
-class puppet::respository {
+class puppet::repository {
 	include apt
 
 	apt::key {
