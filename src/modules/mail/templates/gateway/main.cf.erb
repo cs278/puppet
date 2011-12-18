@@ -70,7 +70,7 @@ disable_vrfy_command = yes
 milter_default_action = accept
 milter_protocol = 2
 smtpd_milters = inet:127.0.0.1:8892
-non_smtpd_milters = inet:127.0.0.1:8892
+non_smtpd_milters = $smtpd_milters
 append_dot_mydomain = no
 recipient_delimiter = +
 
