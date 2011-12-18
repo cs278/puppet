@@ -9,6 +9,7 @@ define network::interface::static($device = $name, $ipaddr, $netmask, $gateway =
 			group   => root,
 			content => template("network/interface/static.erb"),
 			require => Class["network::interfaces"],
+			notify  => Class["network::interfaces"],
 		;
 	}
 }

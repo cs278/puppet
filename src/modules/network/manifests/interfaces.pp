@@ -25,6 +25,12 @@ class network::interfaces {
 		;
 	}
 
+	exec {
+		"/usr/local/sbin/update-interfaces":
+			refreshonly => true,
+		;
+	}
+
 	if extlookup("network::interface::primary::address", "") != "" {
 		network::interface::static {
 			"10-primary":

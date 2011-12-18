@@ -9,6 +9,7 @@ define network::interface::dhcp($device = $name, $hostname = "", $client = "", $
 			group   => root,
 			content => template("network/interface/dhcp.erb"),
 			require => Class["network::interfaces"],
+			notify  => Class["network::interfaces"],
 		;
 	}
 }
