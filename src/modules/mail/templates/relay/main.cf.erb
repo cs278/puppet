@@ -1,0 +1,53 @@
+# No local delivery on outbound relay
+#
+mydestination =
+alias_maps =
+alias_database =
+local_recipient_maps =
+local_transport = error:5.1.1 Mailbox unavailable
+authorized_submit_users =
+
+# Don't rewrite remote headers
+#
+local_header_rewrite_clients =
+
+# Permit proxymap lookups
+proxy_read_maps = $relay_domains $relay_recipient_maps
+
+# Pass original client log information through the filter.
+#
+smtp_send_xforward_command = yes
+
+# Avoid splitting the envelope and scanning messages multiple times.
+# Match the re-injection server's recipient limit.
+#
+smtp_destination_recipient_limit = 1000
+
+# Tolerate occasional high latency in the content filter.
+#
+smtp_data_done_timeout = 1200s
+
+# With xforward, match the output instance setting, if you
+# want "yes", set both to "yes".
+#
+smtpd_client_port_logging = no
+
+<%- if has_variable?("interfaces") && !interfaces.empty? then -%>
+inet_interfaces = <%= interfaces %>
+<%- end -%>
+myhostname = relay.$mydomain
+mynetworks =
+
+# Public SMTP server options
+smtpd_tls_security_level = encrypt
+smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+smtpd_tls_cert_file=/etc/ssl/certs/*.cs278.org.pem
+smtpd_tls_key_file=/etc/ssl/private/*.cs278.org.pem
+smtpd_tls_received_header = yes
+smtpd_tls_ask_ccert = yes
+smtpd_tls_loglevel = 1
+
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
+smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination

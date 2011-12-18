@@ -11,6 +11,10 @@ class roles::mail {
 		include mail::delivery::commissioned
 	}
 
+	if has_role("mail::relay") {
+		include mail::relay::commissioned
+	}
+
 	if has_role("mail::frontend") {
 		include mail::frontend::commissioned
 	}
