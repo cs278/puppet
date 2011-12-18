@@ -14,6 +14,8 @@ Exec {
 }
 
 node default {
+	notice($::location)
+
 	include sudo
 	include git
 	include roles
