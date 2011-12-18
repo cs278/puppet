@@ -33,6 +33,7 @@ class mail::gateway::decommissioned {
 			instance => $instance,
 			path     => "mysql",
 			ensure   => absent,
+			recurse  => true,
 		;
 		"${instance}/mysql/domains.cf":
 			instance => $instance,
@@ -50,6 +51,7 @@ class mail::gateway::decommissioned {
 		"/etc/postfix-policyd-spf-python":
 			instance => $instance,
 			ensure   => absent,
+			recurse  => true,
 			require  => [Mail::Instance["${instance}"], Class["Mail::Gateway::Package"]],
 		;
 		"/etc/postfix-policyd-spf-python/policyd-spf.conf":

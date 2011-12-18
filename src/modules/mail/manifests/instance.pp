@@ -16,6 +16,10 @@ define mail::instance($ensure = present, $master, $main) {
 				"absent" => absent,
 				default  => directory,
 			},
+			recurse => $ensure ? {
+				"absent" => true,
+				default  => false,
+			},
 			owner   => root,
 			group   => root,
 			mode    => 0555,
@@ -25,6 +29,10 @@ define mail::instance($ensure = present, $master, $main) {
 				"absent" => absent,
 				default  => directory,
 			},
+			recurse => $ensure ? {
+				"absent" => true,
+				default  => false,
+			},
 			owner   => root,
 			group   => root,
 			mode    => 0755,
@@ -33,6 +41,10 @@ define mail::instance($ensure = present, $master, $main) {
 			ensure  => $ensure ? {
 				"absent" => absent,
 				default  => directory,
+			},
+			recurse => $ensure ? {
+				"absent" => true,
+				default  => false,
 			},
 			owner   => postfix,
 			group   => postfix,
