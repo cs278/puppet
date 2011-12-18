@@ -1,4 +1,4 @@
-define network::interface::static($device = $name, $ipaddr, $netmask, $gateway = "", $broadcast = "", , $auto = true) {
+define network::interface::static($device = $name, $ipaddr, $netmask, $gateway = "", $broadcast = "", $auto = true) {
 	include network::interfaces::setup
 	include network::interfaces::config
 
