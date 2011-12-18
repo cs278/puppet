@@ -20,4 +20,7 @@ class network::interfaces {
 			;
 		}
 	}
+
+	Network::Interface::Dhcp <| |>
+	Network::Interface::Static <| |>
 }
