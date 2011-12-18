@@ -12,16 +12,16 @@ Facter.add("location") do
 
 		#netname = Facter::Util::Resolution.exec("/usr/bin/whois '%1$s$' | grep -i '^netname:'" % eth0_ip)
 
-		netawseu = IPAddr.new "79.125.0.0/17"
-		netlinode = IPAddr.new "178.79.128.0/18"
+		aws_eu = IPAddr.new "79.125.0.0/17"
+		linode_gb = IPAddr.new "178.79.128.0/18"
 
 		#if !netname.empty?
 		#	netname = netname.split(':')[1].chop.downcase
 		#end
 
-		if kernelrelease.index('linode') != nil || netlinode.include?(ip_public)
-			"linode"
-		elsif netawseu.include?(ip_public)
+		if kernelrelease.index('linode') != nil || linode_gb.include?(ip_public)
+			"linode-gb"
+		elsif aws_eu.include?(ip_public)
 			"aws-eu"
 		else
 			"unknown"
