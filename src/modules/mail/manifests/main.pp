@@ -1,4 +1,4 @@
-class mail::main($instances = []) {
+class mail::main {
 	include mail::package
 	include mail::service
 
@@ -17,7 +17,7 @@ class mail::main($instances = []) {
 			owner   => root,
 			group   => root,
 			content => template("mail/main/main.cf.erb"),
-			require => [$instances, Class["mail::package"]],
+			require => Class["mail::package"],
 			notify  => Class["mail::service"],
 		;
 		"/etc/postfix/generic":
@@ -39,6 +39,8 @@ class mail::main($instances = []) {
 			require => Class["mail::package"],
 		;
 	}
+
+	Mail::Instance <| |>
 
 	exec {
 		[

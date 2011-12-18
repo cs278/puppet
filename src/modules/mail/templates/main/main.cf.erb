@@ -43,4 +43,4 @@ virtual_alias_maps = ${indexed}virtual
 # Simulates postmulti -e init
 multi_instance_wrapper = ${command_directory}/postmulti -p --
 multi_instance_enable = yes
-multi_instance_directories = <% instances.each do |instance| %>/etc/postfix-<%= instance.name.gsub('Class/', '').split('::')[1].downcase %> <% end %>
+multi_instance_directories = <%= Pathname.glob("/etc/postfix-*/main.cf").map { |i| i.dirname }.join(" ") %>

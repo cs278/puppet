@@ -3,6 +3,8 @@ class mail::delivery::commissioned inherits mail::storage::commissioned {
 
 	$interfaces = extlookup("mail::delivery::interfaces", "")
 
+	$instance = "delivery"
+
 	user {
 		"mail":
 			ensure  => present,
@@ -21,7 +23,7 @@ class mail::delivery::commissioned inherits mail::storage::commissioned {
 		;
 	}
 
-	mail::instance {
+	@mail::instance {
 		"delivery":
 			master  => template("mail/delivery/master.cf.erb"),
 			main    => template("mail/delivery/main.cf.erb"),
@@ -29,62 +31,68 @@ class mail::delivery::commissioned inherits mail::storage::commissioned {
 		;
 	}
 
-	file {
+	@mail::instance::file {
 		"${vmail_store}":
+			instance => $instance,
 			ensure  => directory,
 			mode    => 0755,
 			owner   => mail,
 			group   => mail,
 			require => [Class["mail::delivery::package"], User["mail"]],
 		;
-		"/etc/postfix-delivery/mysql":
+	}
+
+	@mail::instance::config::file {
+		"${instance}/mysql":
+			instance => $instance,
+			path    => "mysql",
 			ensure  => directory,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => Mail::Instance["delivery"],
 		;
-		"/etc/postfix-delivery/mysql/aliases.cf":
+		"${instance}/mysql/aliases.cf":
+			instance => $instance,
+			path    => "mysql/aliases.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => File["/etc/postfix-delivery/mysql"],
-			notify  => Class["mail::service"],
 			content => template("mail/delivery/mysql/aliases.cf.erb"),
 		;
-		"/etc/postfix-delivery/mysql/domains.cf":
+		"${instance}/mysql/domains.cf":
+			instance => $instance,
+			path    => "mysql/domains.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => File["/etc/postfix-delivery/mysql"],
-			notify  => Class["mail::service"],
 			content => template("mail/delivery/mysql/domains.cf.erb"),
 		;
-		"/etc/postfix-delivery/mysql/mailboxes.cf":
+		"${instance}/mysql/mailboxes.cf":
+			instance => $instance,
+			path    => "mysql/mailboxes.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => File["/etc/postfix-delivery/mysql"],
-			notify  => Class["mail::service"],
 			content => template("mail/delivery/mysql/mailboxes.cf.erb"),
 		;
-		"/etc/postfix-delivery/mysql/transport.cf":
+		"${instance}/mysql/transport.cf":
+			instance => $instance,
+			path    => "mysql/transport.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => File["/etc/postfix-delivery/mysql"],
-			notify  => Class["mail::service"],
 			content => template("mail/delivery/mysql/transport.cf.erb"),
 		;
 	}
 
 	if $vmail_store != "/var/spool/mail" {
-		file {
+		@mail::instance::file {
 			"/var/spool/mail":
+				instance => $instance,
 				ensure  => symlink,
 				target  => $vmail_store,
 				replace => true,

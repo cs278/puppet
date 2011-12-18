@@ -14,6 +14,8 @@ class mail::gateway::commissioned {
 
 	$etc = "/etc/postfix-gateway"
 
+	$instance = "gateway"
+
 	group {
 		"policyd-spf":
 			ensure => present,
@@ -32,7 +34,7 @@ class mail::gateway::commissioned {
 		;
 	}
 
-	mail::instance {
+	@mail::instance {
 		"gateway":
 			master  => template("mail/gateway/master.cf.erb"),
 			main    => template("mail/gateway/main.cf.erb"),
@@ -44,33 +46,38 @@ class mail::gateway::commissioned {
 		;
 	}
 
-	file {
-		"${etc}/mysql":
+	@mail::instance::config::file {
+		"${instance}/mysql":
+			instance => $instance,
+			path    => "mysql",
 			ensure  => directory,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => Mail::Instance["gateway"],
 		;
-		"${etc}/mysql/domains.cf":
+		"${instance}/mysql/domains.cf":
+			instance => $instance,
+			path    => "mysql/domains.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => File["${etc}/mysql"],
-			notify  => Class["mail::service"],
 			content => template("mail/gateway/mysql/domains.cf.erb"),
 		;
-		"${etc}/mysql/recipients.cf":
+		"${instance}/mysql/recipients.cf":
+			instance => $instance,
+			path    => "mysql/recipients.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
-			require => File["${etc}/mysql"],
-			notify  => Class["mail::service"],
 			content => template("mail/gateway/mysql/recipients.cf.erb"),
 		;
+	}
+
+	@mail::instance::file {
 		"/etc/postfix-policyd-spf-python":
+			instance => $instance,
 			ensure  => directory,
 			mode    => 0444,
 			owner   => root,
@@ -78,6 +85,7 @@ class mail::gateway::commissioned {
 			require => [Mail::Instance["gateway"], Class["Mail::Gateway::Package"]],
 		;
 		"/etc/postfix-policyd-spf-python/policyd-spf.conf":
+			instance => $instance,
 			ensure => file,
 			mode   => 0444,
 			owner  => root,
