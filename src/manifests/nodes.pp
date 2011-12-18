@@ -1,6 +1,11 @@
 # extlookup() configuration
 $extlookup_datadir = "conf"
-$extlookup_precedence = ["private/${::fqdn}", "private/common", "${::fqdn}", "common"]
+$extlookup_precedence = [
+	"private/${::fqdn}",
+	"private/common",
+	"${::fqdn}",
+	"common",
+]
 
 include common
 include apt
