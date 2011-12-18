@@ -1,6 +1,6 @@
-<% if auto %>
-	auto <%= device %>
-<% end %>
+<%- if auto -%>
+auto <%= device %>
+<%- end -%>
 
 iface <%= device %> inet static
 	address <%= ipaddr %>
