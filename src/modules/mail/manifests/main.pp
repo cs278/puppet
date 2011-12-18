@@ -1,6 +1,7 @@
 class mail::main {
 	include mail::package
 	include mail::service
+	include mail::main::instances
 
 	if $::ec2_public_hostname {
 		$myhostname = $::ec2_public_hostname
@@ -17,7 +18,7 @@ class mail::main {
 			owner   => root,
 			group   => root,
 			content => template("mail/main/main.cf.erb"),
-			require => Class["mail::package"],
+			require => [Class["mail::main::instances"], Class["mail::package"]],
 			notify  => Class["mail::service"],
 		;
 		"/etc/postfix/generic":
@@ -27,7 +28,7 @@ class mail::main {
 			group   => root,
 			content => template("mail/main/generic.erb"),
 			notify  => Exec["postmap cdb:/etc/postfix/generic"],
-			require => Class["mail::package"],
+			require => [Class["mail::main::instances"], Class["mail::package"]],
 		;
 		"/etc/postfix/virtual":
 			ensure  => present,
@@ -36,11 +37,9 @@ class mail::main {
 			group   => root,
 			content => template("mail/main/virtual.erb"),
 			notify  => Exec["postmap cdb:/etc/postfix/virtual"],
-			require => Class["mail::package"],
+			require => [Class["mail::main::instances"], Class["mail::package"]],
 		;
 	}
-
-	Mail::Instance <| |>
 
 	exec {
 		[
