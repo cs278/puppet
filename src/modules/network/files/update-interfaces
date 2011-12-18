@@ -8,6 +8,7 @@ fi
 
 src=/etc/network/interfaces.d
 tmp=/etc/network/.interfaces.tmp
+dst=/etc/network/interfaces
 
 > "$tmp"
 
@@ -23,3 +24,8 @@ do
 	cat "$file" >> "$tmp"
 	echo "" >> "$tmp"
 done
+
+mv -f "$tmp" "$dst"
+rm -f "$tmp"
+
+/etc/init.d/networking restart
