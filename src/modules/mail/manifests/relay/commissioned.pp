@@ -1,5 +1,6 @@
 class mail::relay::commissioned inherits mail::storage::commissioned  {
 	include mail::relay::package
+	include mail::storage::service
 
 	$interfaces = extlookup("mail::relay::interfaces", "")
 
@@ -23,5 +24,6 @@ class mail::relay::commissioned inherits mail::storage::commissioned  {
 			owner    => root,
 			group    => root,
 			content  => template("mail/${instance}/dovecot-sasl.conf.erb"),
+			notify   => Class["mail::storage::service"],
 	}
 }
