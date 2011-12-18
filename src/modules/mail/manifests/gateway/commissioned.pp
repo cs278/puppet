@@ -4,6 +4,7 @@ class mail::gateway::commissioned {
 
 	$index = extlookup("mail::gateway::index")
 	$hub = extlookup("mail::gateway::hub")
+	$relay = extlookup("mail::relay")
 
 	$db_hosts = extlookup("mail::gateway::hosts")
 	$db_username = extlookup("mail::gateway::username")

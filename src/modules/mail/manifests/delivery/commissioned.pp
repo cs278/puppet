@@ -2,6 +2,7 @@ class mail::delivery::commissioned inherits mail::storage::commissioned {
 	include mail::delivery::package
 
 	$interfaces = extlookup("mail::delivery::interfaces", "")
+	$relay = extlookup("mail::relay")
 
 	$instance = "delivery"
 
