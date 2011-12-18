@@ -4,6 +4,7 @@ define network::interface::static($device = $name, $ipaddr, $netmask, $gateway =
 	file {
 		"${name}-${device}":
 			ensure  => file,
+			path    => "/etc/network/interfaces.d/${name}-${device}",
 			mode    => 0444,
 			owner   => root,
 			group   => root,
