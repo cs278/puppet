@@ -24,13 +24,14 @@ mynetworks =
 relayhost = [<%= relay %>]
 
 # Public SMTP server options
-smtpd_tls_security_level = may
+smtpd_tls_security_level = encrypt
 smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
 smtpd_tls_cert_file=/etc/ssl/certs/*.cs278.org.pem
 smtpd_tls_key_file=/etc/ssl/private/*.cs278.org.pem
 smtpd_tls_received_header = yes
 smtpd_tls_ask_ccert = yes
 smtpd_tls_loglevel = 1
+smtpd_tls_mandatory_ciphers = high
 
 # Inbound settings
 biff = no
