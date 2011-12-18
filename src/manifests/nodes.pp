@@ -2,14 +2,14 @@
 $extlookup_datadir = "conf"
 $extlookup_precedence = [
 	"private/${::fqdn}",
-	"private/${::location}",
-	"private/${::country}",
-	"private/${::region}",
+	"private/location/${::location}",
+	"private/country/${::country}",
+	"private/region/${::region}",
 	"private/common",
 	"${::fqdn}",
-	"${::location}",
-	"${::country}",
-	"${::region}",
+	"location/${::location}",
+	"country/${::country}",
+	"region/${::region}",
 	"common",
 ]
 
