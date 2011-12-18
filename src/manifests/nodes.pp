@@ -14,7 +14,9 @@ Exec {
 }
 
 node default {
-	notice($::location)
+	notice("Location: ${::location}")
+	notice("Country: ${::country}")
+	notice("Region: ${::region}")
 
 	include sudo
 	include git
