@@ -28,6 +28,8 @@ node default {
 	notice("Location: ${::location}")
 	notice("Country: ${::country}")
 	notice("Region: ${::region}")
+	notice("Linode? ${::linode}")
+	notice("Linode ID: ${::linode_id}")
 
 	include sudo
 	include git
