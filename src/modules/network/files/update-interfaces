@@ -7,11 +7,19 @@ then
 fi
 
 src=/etc/network/interfaces.d
-dst=/etc/.interfaces.tmp
+tmp=/etc/network/.interfaces.tmp
 
-> "$dst"
+> "$tmp"
 
 find "$src" -type f ! -name ".*" | sort | while read file
 do
-	cat "$file" >> "$dst"
+	basename=$(basename "$file")
+
+	if echo "$basename" | grep -v '^00-';
+	then
+		echo "# $basename" >> "$tmp"
+	fi
+
+	cat "$file" >> "$tmp"
+	echo "" >> "$tmp"
 done

@@ -1,4 +1,6 @@
 class network {
+	include network::interfaces
+
 	$hostname = $::hostname
 	$fqdn = $::fqdn
 
