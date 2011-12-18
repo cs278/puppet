@@ -47,23 +47,26 @@ class mail::gateway::commissioned {
 	}
 
 	@mail::instance::config::file {
-		"mysql":
+		"${instance}/mysql":
 			instance => $instance,
+			path    => "mysql",
 			ensure  => directory,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
 		;
-		"mysql/domains.cf":
+		"${instance}/mysql/domains.cf":
 			instance => $instance,
+			path    => "mysql/domains.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
 			content => template("mail/gateway/mysql/domains.cf.erb"),
 		;
-		"mysql/recipients.cf":
+		"${instance}/mysql/recipients.cf":
 			instance => $instance,
+			path    => "mysql/recipients.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,

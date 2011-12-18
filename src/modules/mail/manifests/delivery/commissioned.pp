@@ -43,39 +43,44 @@ class mail::delivery::commissioned inherits mail::storage::commissioned {
 	}
 
 	@mail::instance::config::file {
-		"mysql":
+		"${instance}/mysql":
 			instance => $instance,
+			path    => "mysql",
 			ensure  => directory,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
 		;
-		"mysql/aliases.cf":
+		"${instance}/mysql/aliases.cf":
 			instance => $instance,
+			path    => "mysql/aliases.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
 			content => template("mail/delivery/mysql/aliases.cf.erb"),
 		;
-		"mysql/domains.cf":
+		"${instance}/mysql/domains.cf":
 			instance => $instance,
+			path    => "mysql/domains.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
 			content => template("mail/delivery/mysql/domains.cf.erb"),
 		;
-		"mysql/mailboxes.cf":
+		"${instance}/mysql/mailboxes.cf":
 			instance => $instance,
+			path    => "mysql/mailboxes.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
 			group   => root,
 			content => template("mail/delivery/mysql/mailboxes.cf.erb"),
 		;
-		"mysql/transport.cf":
+		"${instance}/mysql/transport.cf":
 			instance => $instance,
+			path    => "mysql/transport.cf",
 			ensure  => file,
 			mode    => 0444,
 			owner   => root,
