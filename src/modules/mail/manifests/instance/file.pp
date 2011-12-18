@@ -32,21 +32,21 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 		}
 	}
 
-	if member(['absent', 'present', 'file', 'directory'], $ensure) {
-		if $content != "" {
-			File[$path] {
-				content +> $content,
-			}
-		} elsif $source != "" {
-			File[$path] {
-				source +> $source,
-			}
+	if $content != "" {
+		File[$path] {
+			content +> $content,
 		}
-	} else {
-		if $target != "" {
-			File[$path] {
-				target +> $target,
-			}
+	}
+
+	if $source != "" {
+		File[$path] {
+			source +> $source,
+		}
+	}
+
+	if $target != "" {
+		File[$path] {
+			target +> $target,
 		}
 	}
 }
