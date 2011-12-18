@@ -9,9 +9,9 @@ Facter.add("linode") do
 		linode_gb = IPAddr.new "178.79.128.0/18"
 
 		if kernelrelease.index('linode') != nil || linode_gb.include?(ip_public)
-			"1"
+			1
 		else
-			"0"
+			0
 		end
 	end
 end

@@ -16,6 +16,7 @@ $extlookup_precedence = [
 include common
 include apt
 include base
+include linode
 include network
 include timezone
 include ntp
@@ -30,6 +31,7 @@ node default {
 	notice("Region: ${::region}")
 	notice("Linode? ${::linode}")
 	notice("Linode ID: ${::linode_id}")
+	notice("Linode Prvate IP: ${::linode_private_ip}")
 
 	include sudo
 	include git
