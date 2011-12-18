@@ -16,10 +16,15 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 			ensure  => $ensure,
 			mode    => $mode,
 			owner   => $owner,
-			group   => $group,
 			replace => $replace,
 			force   => $force,
 		;
+	}
+
+	if $group != "" {
+		File[$path] {
+			group +> $group,
+		}
 	}
 
 	if $ensure == "symlink" {
