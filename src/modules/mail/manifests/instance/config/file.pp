@@ -1,4 +1,4 @@
-define mail::instance::config::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "", $replace = false, $force = false) {
+define mail::instance::config::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "", $target = "", $replace = false, $force = false) {
 	include mail::service
 
 	validate_string($path)
@@ -9,6 +9,7 @@ define mail::instance::config::file($path = $name, $instance, $ensure = present,
 	validate_string($group)
 	validate_string($content)
 	validate_string($source)
+	validate_string($target)
 	validate_bool($replace)
 	validate_bool($force)
 
@@ -21,6 +22,7 @@ define mail::instance::config::file($path = $name, $instance, $ensure = present,
 			group    => $group,
 			content  => $content,
 			source   => $source,
+			target   => $target,
 			replace  => $replace,
 			force    => $force,
 			require  => Mail::Instance[$instance],

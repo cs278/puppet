@@ -1,4 +1,4 @@
-define mail::instance::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "", $replace = false, $force = false) {
+define mail::instance::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "", $target = "", $replace = false, $force = false) {
 	validate_string($path)
 	validate_string($instance)
 	validate_string($ensure)
@@ -7,6 +7,7 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 	validate_string($group)
 	validate_string($content)
 	validate_string($source)
+	validate_string($target)
 	validate_bool($replace)
 	validate_bool($force)
 
@@ -21,7 +22,11 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 		;
 	}
 
-	if $content != "" {
+	if $ensure == "symlink" {
+		File[$path] {
+			target +> $target,
+		}
+	} elsif $content != "" {
 		File[$path] {
 			content +> $content,
 		}
