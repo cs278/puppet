@@ -1,4 +1,4 @@
-define mail::instance::config::file($path = $name, $instance, $ensure = present, $mode = 0, $owner = "", $group = "", $content = "", $source = "", $target = "", $replace = false, $force = false, $recurse = false) {
+define mail::instance::config::file($path = $name, $instance, $ensure = present, $mode = "", $owner = "", $group = "", $content = "", $source = "", $target = "", $replace = false, $force = false, $recurse = false) {
 	include mail::service
 
 	validate_string($path)
