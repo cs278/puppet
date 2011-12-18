@@ -14,7 +14,7 @@ local_header_rewrite_clients =
 # Permit proxymap lookups
 proxy_read_maps = $transport_maps $virtual_alias_maps $virtual_mailbox_domains $virtual_mailbox_maps
 
-<%- if has_variable?("interfaces") && interfaces then -%>
+<%- if has_variable?("interfaces") && !interfaces.empty? then -%>
 inet_interfaces = <%= interfaces %>
 <%- end -%>
 myhostname = delivery.mail.$mydomain
