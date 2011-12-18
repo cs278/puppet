@@ -18,6 +18,7 @@ class mail::gateway::decommissioned {
 
 	@mail::instance {
 		"${instance}":
+			ensure  => absent,
 			master  => "",
 			main    => "",
 			require => [
