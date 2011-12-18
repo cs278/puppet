@@ -1,36 +1,4 @@
 class network::interfaces {
-	file {
-		"/etc/network/interfaces.d":
-			ensure  => directory,
-			mode    => 0555,
-			owner   => root,
-			group   => root,
-			recurse => true,
-			purge   => true,
-			force   => true,
-			source  => "puppet:///modules/network/interfaces.d",
-		;
-		"/etc/network/interfaces":
-			ensure  => file,
-			mode    => 0444,
-			owner   => root,
-			group   => root,
-		;
-		"/usr/local/sbin/update-interfaces":
-			ensure  => file,
-			mode    => 0555,
-			owner   => root,
-			group   => root,
-			source  => "puppet:///modules/network/update-interfaces",
-		;
-	}
-
-	exec {
-		"/usr/local/sbin/update-interfaces":
-			refreshonly => true,
-		;
-	}
-
 	if extlookup("network::interface::primary::address", "") != "" {
 		network::interface::static {
 			"10-primary":

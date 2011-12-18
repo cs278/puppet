@@ -1,5 +1,6 @@
 define network::interface::dhcp($device = $name, $hostname = "", $client = "", $auto = true) {
-	include network::interfaces
+	include network::interfaces::setup
+	include network::interfaces::config
 
 	file {
 		"${name}-${device}":
@@ -9,8 +10,8 @@ define network::interface::dhcp($device = $name, $hostname = "", $client = "", $
 			owner   => root,
 			group   => root,
 			content => template("network/interface/dhcp.erb"),
-			require => Class["network::interfaces"],
-			notify  => Class["network::interfaces"],
+			require => Class["network::interfaces::setup"],
+			notify  => Class["network::interfaces::config"],
 		;
 	}
 }
