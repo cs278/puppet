@@ -15,10 +15,15 @@ define mail::instance::file($path = $name, $instance, $ensure = present, $mode =
 		"${path}":
 			ensure  => $ensure,
 			mode    => $mode,
-			owner   => $owner,
 			replace => $replace,
 			force   => $force,
 		;
+	}
+
+	if $owner != "" {
+		File[$path] {
+			owner +> $owner,
+		}
 	}
 
 	if $group != "" {
