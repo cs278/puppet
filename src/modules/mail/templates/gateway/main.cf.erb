@@ -78,6 +78,9 @@ relay_domains = proxy:mysql:${config_directory}/mysql/domains.cf
 relay_recipient_maps = proxy:mysql:${config_directory}/mysql/recipients.cf
 relay_transport = smtp:[<%= hub %>]
 
+# Domains that don't match $relay_domains will go via the default transport
+default_transport = smtp:[<%= relay %>]
+
 smtpd_client_restrictions = 
 #	check_client_access cdb:${config_directory}/access/client,
 #	check_client_access cdb:${config_directory}/access/blacklist,

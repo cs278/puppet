@@ -20,6 +20,9 @@ inet_interfaces = <%= interfaces %>
 myhostname = delivery.mail.$mydomain
 mynetworks =
 
+# Outbound mail should go via our relay
+relayhost = [<%= relay %>]
+
 # Public SMTP server options
 smtpd_tls_security_level = may
 smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
