@@ -12,7 +12,7 @@ filegen peerstats file peerstats type day enable
 filegen clockstats file clockstats type day enable
 
 # You do need to talk to an NTP server or two (or three).
-<% if has_variable?("pool") && pool then %>
+<% if has_variable?("pool") && !pool.empty? then %>
 server 0.<%= pool %>.pool.ntp.org
 server 1.<%= pool %>.pool.ntp.org
 server 2.<%= pool %>.pool.ntp.org
