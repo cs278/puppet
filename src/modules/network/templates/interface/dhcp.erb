@@ -1,0 +1,11 @@
+<% if auto %>
+	auto <%= device %>
+<% end %>
+
+iface <%= device %> inet dhcp
+	<%- if !hostname.empty? -%>
+	hostname <%= hostname %>
+	<%- end -%>
+	<%- if !client.empty? -%>
+	client <%= client %>
+	<%- end -%>

@@ -1,0 +1,13 @@
+<% if auto %>
+	auto <%= device %>
+<% end %>
+
+iface <%= device %> inet static
+	address <%= ipaddr %>
+	netmask <%= netmask %>
+	<%- if !gateway.empty? -%>
+	gateway <%= gateway %>
+	<%- end -%>
+	<%- if !broadcast.empty? -%>
+	broadcast <%= broadcast %>
+	<%- end -%>
