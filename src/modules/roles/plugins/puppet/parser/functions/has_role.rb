@@ -15,11 +15,11 @@ module Puppet::Parser::Functions
 
     role = args[0]
 
-	result = function_extlookup(["roles::".concat(role), ""])
+	result = function_extlookup(["roles::".concat(role), ""]).to_i
 
 	function_debug(["has_role(%s): %s" % [role, result]])
 
-    has_role = result.length > 0
+    has_role = result > 0
 
     return has_role
   end
