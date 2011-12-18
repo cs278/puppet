@@ -26,7 +26,7 @@ class network::interfaces {
 	}
 
 	if extlookup("network::interface::primary::address", "") != "" {
-		@network::interface::static {
+		network::interface::static {
 			"10-primary":
 				device    => extlookup("network::interface::primary::device", "eth0"),
 				ipaddr    => extlookup("network::interface::primary::address"),
@@ -37,7 +37,7 @@ class network::interfaces {
 			;
 		}
 	} else {
-		@network::interface::dhcp {
+		network::interface::dhcp {
 			"10-primary":
 				device   => extlookup("network::interface::primary::device", "eth0"),
 				hostname => extlookup("network::interface::primary::hostname", ""),
