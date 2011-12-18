@@ -1,5 +1,5 @@
 class base::puppet {
-	include puppet
+	include ::puppet
 	include git
 	include git::serve
 
@@ -27,6 +27,7 @@ class base::puppet {
 			gid     => "puppet",
 			home	=> "/var/lib/puppet",
 			shell	=> "/bin/sh",
+			require => Class["::puppet"],
 		;
 	}
 
