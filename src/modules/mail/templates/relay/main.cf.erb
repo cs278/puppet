@@ -17,7 +17,7 @@ proxy_read_maps =
 <%- if has_variable?("interfaces") && !interfaces.empty? then -%>
 inet_interfaces = <%= interfaces %>
 <%- end -%>
-myhostname = $myhostname
+myhostname = smtp.$mydomain
 mynetworks =
 
 # Public SMTP server options
