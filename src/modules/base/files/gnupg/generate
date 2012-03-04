@@ -1,0 +1,45 @@
+#!/bin/bash
+
+if [ -z "$1" ];
+then
+	echo "Usage: $0 <homedir>" >&2
+	exit 1
+fi
+
+FQDN=$(hostname --fqdn)
+EMAIL=hostmaster@cs278.org
+EXPIRES="2012-06-01"
+HOMEDIR=$1
+REVOKER="17:3B0785C3265AFBB4CB22BCE558DCC6CCDFAD1033"
+
+if [ ! -d "$HOMEDIR" ];
+then
+	echo "$HOMEDIR does not exist." >&2
+	exit 1
+fi
+
+#gpg --homedir $HOMEDIR --import <<EOT
+#EOT
+
+if
+	gpg --no-tty --batch -q --homedir $HOMEDIR --list-keys "$FQDN" &>/dev/null &&
+	! gpg --no-tty --batch -q --homedir $HOMEDIR --list-keys "$FQDN" 2>/dev/null | grep '^pub' | grep -q '\[expired: ';
+then
+	echo "Valid public key already exists." >&2
+
+	gpg --no-tty --batch -q --homedir $HOMEDIR --list-keys "$FQDN" 2>/dev/null | grep '^pub' | grep -v '\[expired: ' >&2
+
+	exit 1
+fi
+
+echo "%no-protection
+%echo Generating system GnuPG key
+Key-Type: RSA
+Key-Length: 2048
+Key-Usage: encrypt
+Name-Real: $FQDN
+Name-Email: $EMAIL
+Expire-Date: $EXPIRES
+Revoker: $REVOKER
+%commit
+%echo Done" | gpg --gen-key --no-tty --batch --homedir $HOMEDIR
