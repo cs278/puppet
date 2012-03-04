@@ -23,6 +23,7 @@ class base::gnupg {
 
 	exec {
 		"/usr/local/sbin/update-system-key ${homedir}":
+			timeout => 1800, # 30 minute timeout
 			require => File["/usr/local/sbin/update-system-key"],
 		;
 	}
