@@ -25,11 +25,11 @@ if
 	gpg --no-tty --batch -q --homedir $HOMEDIR --list-keys "$FQDN" &>/dev/null &&
 	! gpg --no-tty --batch -q --homedir $HOMEDIR --list-keys "$FQDN" 2>/dev/null | grep '^pub' | grep -q '\[expired: ';
 then
-	echo "Valid public key already exists." >&2
+	echo "Valid public key already exists."
 
-	gpg --no-tty --batch -q --homedir $HOMEDIR --list-keys "$FQDN" 2>/dev/null | grep '^pub' | grep -v '\[expired: ' >&2
+	gpg --no-tty --batch -q --homedir $HOMEDIR --list-keys "$FQDN" 2>/dev/null | grep '^pub' | grep -v '\[expired: '
 
-	exit 1
+	exit 0
 fi
 
 echo "%no-protection
